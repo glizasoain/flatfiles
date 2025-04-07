@@ -1,0 +1,20 @@
+name: transaction
+description: "Transaction record specification"
+record_length: 45
+fields:
+  - name: transaction_id
+    length: 10
+    type: string
+    description: "Transaction identifier"
+  - name: amount
+    length: 15
+    type: decimal
+    description: "Transaction amount"
+  - name: date
+    length: 8
+    type: date
+    description: "Transaction date (YYYYMMDD)"
+  - name: customer_id
+    length: 12
+    type: string
+    description: "Customer identifier" 

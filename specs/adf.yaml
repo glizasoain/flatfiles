@@ -1,0 +1,2137 @@
+# TSYS Authorization Detail File (ADF) Specification v8.6
+
+TH01:
+  description: "Transmission Header Record"
+  length: 900
+  fields:
+    - number: 1
+      name: "record_type"
+      display_name: "RECORD TYPE"
+      position: "1-4"
+      length: 4
+      type: "A/N"
+      description: "Indicates that this record is the Transmission Header"
+      valid_value: "TH01"
+
+    - number: 2
+      name: "version_number"
+      display_name: "VERSION NUMBER"
+      position: "5-9"
+      length: 5
+      type: "A/N"
+      description: "Identifies the Report Version Number"
+      example: "01.00"
+
+    - number: 3
+      name: "destination_id"
+      display_name: "DESTINATION ID"
+      position: "10-39"
+      length: 30
+      type: "A/N"
+      description: "Identifies the destination client ID from the report registration"
+
+    - number: 4
+      name: "file_type"
+      display_name: "FILE TYPE"
+      position: "40-49"
+      length: 10
+      type: "A/N"
+      description: "Identifies the file type being sent"
+      valid_value: "ADF"
+
+    - number: 5
+      name: "file_frequency"
+      display_name: "FILE FREQUENCY"
+      position: "50"
+      length: 1
+      type: "A/N"
+      description: "Identifies the frequency in which the file is sent"
+      valid_values:
+        "B": "Bi-hourly"
+        "D": "Daily"
+        "W": "Weekly"
+
+    - number: 6
+      name: "processing_year"
+      display_name: "PROCESSING YEAR"
+      position: "51-54"
+      length: 4
+      type: "N"
+      description: "Identifies the year in which the file was created"
+      format: "YYYY"
+
+    - number: 7
+      name: "processing_month"
+      display_name: "PROCESSING MONTH"
+      position: "55-56"
+      length: 2
+      type: "N"
+      description: "Identifies the month in which the file was created"
+      format: "MM"
+      valid_range: "01-12"
+
+    - number: 8
+      name: "processing_week"
+      display_name: "PROCESSING WEEK"
+      position: "57"
+      length: 1
+      type: "N"
+      description: "Identifies the week in which the file was created"
+      notes: "Only used for weekly files, blank otherwise"
+      valid_values:
+        "1": "Week 1 (day 1-7)"
+        "2": "Week 2 (day 8-15)"
+        "3": "Week 3 (day 16-22)"
+        "4": "Week 4 (day 23-end of month)"
+
+    - number: 9
+      name: "processing_day"
+      display_name: "PROCESSING DAY"
+      position: "58-59"
+      length: 2
+      type: "N"
+      description: "Reserved for TSYS Acquiring Solutions use only"
+
+    - number: 10
+      name: "processing_end_hour"
+      display_name: "PROCESSING END HOUR"
+      position: "60-61"
+      length: 2
+      type: "N"
+      description: "Identifies the hour in which the file was created if bi-hourly"
+      format: "HH"
+      notes: "24-hour clock, based on GMT. Blank if not bi-hourly"
+
+    - number: 11
+      name: "file_reference_id"
+      display_name: "FILE REFERENCE ID"
+      position: "62-81"
+      length: 20
+      type: "A/N"
+      description: "Reserved for TSYS Acquiring Solutions use only"
+
+    - number: 12
+      name: "file_creation_date_time"
+      display_name: "FILE CREATION DATE & TIME"
+      position: "82-100"
+      length: 19
+      type: "A/N"
+      description: "Identifies the date and time (GMT) the file was created"
+      format: "YYYY-MM-DD HH:MM:SS"
+
+    - number: 13
+      name: "reserved_internal_1"
+      display_name: "RESERVED (internal)"
+      position: "101-119"
+      length: 19
+      type: "A/N"
+      description: "Reserved for TSYS Acquiring Solutions use only"
+
+    - number: 14
+      name: "reserved_internal_2"
+      display_name: "RESERVED (internal)"
+      position: "120-138"
+      length: 19
+      type: "A/N"
+      description: "Reserved for TSYS Acquiring Solutions use only"
+
+    - number: 15
+      name: "reserved_for_future_use"
+      display_name: "RESERVED (for future use)"
+      position: "139-900"
+      length: 762
+      type: "A/N"
+      description: "Reserved for future use"
+
+BH01:
+  description: "BIN Header Record"
+  length: 900
+  fields:
+    - number: 1
+      name: "record_type"
+      display_name: "RECORD TYPE"
+      position: "1-4"
+      length: 4
+      type: "A/N"
+      description: "Indicates that this record is the BIN Header"
+      valid_value: "BH01"
+
+    - number: 2
+      name: "acquirer_bin"
+      display_name: "ACQUIRER BIN"
+      position: "5-10"
+      length: 6
+      type: "A/N"
+      description: "Identifies the financial institution acting as the Acquirer"
+
+    - number: 3
+      name: "reserved_for_future_use"
+      display_name: "RESERVED (for future use)"
+      position: "11-900"
+      length: 890
+      type: "A/N"
+      description: "Reserved for future use"
+
+RH01:
+  description: "Report Header Record"
+  length: 900
+  fields:
+    - number: 1
+      name: "record_type"
+      display_name: "RECORD TYPE"
+      position: "1-4"
+      length: 4
+      type: "A/N"
+      description: "Indicates that this record is the Report Header"
+      valid_value: "RH01"
+
+    - number: 2
+      name: "acquirer_bin"
+      display_name: "ACQUIRER BIN"
+      position: "5-10"
+      length: 6
+      type: "A/N"
+      description: "Identifies the financial institution acting as the Acquirer"
+
+    - number: 3
+      name: "agent"
+      display_name: "AGENT"
+      position: "11-16"
+      length: 6
+      type: "A/N"
+      description: "Identifies the agent filter from the report registration"
+      valid_values:
+        - "6 character agent value"
+        - "NA": "Left justified space filled"
+        - "Space filled"
+
+    - number: 4
+      name: "chain"
+      display_name: "CHAIN"
+      position: "17-22"
+      length: 6
+      type: "A/N"
+      description: "Identifies the chain filter from the report registration"
+      valid_values:
+        - "6 character chain value"
+        - "NA": "Left justified space filled"
+        - "Space filled"
+
+    - number: 5
+      name: "effective_start_date_time"
+      display_name: "EFFECTIVE START DATE & TIME"
+      position: "23-41"
+      length: 19
+      type: "A/N"
+      description: "Start date and time (GMT) from the report registration"
+      format: "YYYY-MM-DD HH:MM:SS"
+
+    - number: 6
+      name: "effective_end_date_time"
+      display_name: "EFFECTIVE END DATE & TIME"
+      position: "42-60"
+      length: 19
+      type: "A/N"
+      description: "End date and time (GMT) from the report registration"
+      format: "YYYY-MM-DD HH:MM:SS"
+
+    - number: 7
+      name: "include_error_transaction"
+      display_name: "INCLUDE ERROR TRANSACTION"
+      position: "61"
+      length: 1
+      type: "A/N"
+      description: "Indicates if error transactions are present in the report"
+      valid_values:
+        "1": "All - Includes all transactions"
+        "2": "Not a valid option"
+        "3": "Not a valid option"
+        "4": "No HV - Includes all transactions except Hierarchy Validation errors"
+      notes: "As indicated in field 44 in the Transaction Detail record"
+
+    - number: 8
+      name: "reserved_internal"
+      display_name: "RESERVED (internal)"
+      position: "62-81"
+      length: 20
+      type: "A/N"
+      description: "Reserved for TSYS Acquiring Solutions internal use"
+
+    - number: 9
+      name: "reserved_for_future_use"
+      display_name: "RESERVED (for future use)"
+      position: "82-900"
+      length: 819
+      type: "A/N"
+      description: "Reserved for future use"
+
+TD01:
+  description: "Transaction Detail Record"
+  length: 900
+  fields:
+    - number: 1
+      name: "record_type"
+      display_name: "RECORD TYPE"
+      position: "1-4"
+      length: 4
+      type: "A/N"
+      description: "Indicates that this record is the Transaction Detail Record"
+      valid_value: "TD01"
+
+    - number: 2
+      name: "acquirer_bin"
+      display_name: "ACQUIRER BIN"
+      position: "5-10"
+      length: 6
+      type: "A/N"
+      description: "Identifies the acquirer's BIN for the customer transaction"
+      iso_field: "32[1-6]"
+
+    - number: 3
+      name: "ext_bin"
+      display_name: "EXT BIN"
+      position: "11-15"
+      length: 5
+      type: "A/N"
+      description: "Identifies the extra data received from the ISO message for the BIN"
+      iso_field: "32[7-11]"
+
+    - number: 4
+      name: "agent"
+      display_name: "AGENT"
+      position: "16-21"
+      length: 6
+      type: "A/N"
+      description: "Six-character value assigned by the merchant's bank or processor for agent identification"
+
+    - number: 5
+      name: "chain"
+      display_name: "CHAIN"
+      position: "22-27"
+      length: 6
+      type: "A/N"
+      description: "Six-character value assigned for chain identification"
+
+    - number: 6
+      name: "econnection_merchant_number"
+      display_name: "ECONNECTION MERCHANT NUMBER"
+      position: "28-42"
+      length: 15
+      type: "A/N"
+      description: "Merchant number displayed in the e-Connections Authorization and Capture module"
+
+    - number: 7
+      name: "store_number"
+      display_name: "STORE NUMBER"
+      position: "43-46"
+      length: 4
+      type: "A/N"
+      description: "Identifies the store number"
+      iso_field: "41[1-4]"
+
+    - number: 8
+      name: "terminal_number"
+      display_name: "TERMINAL NUMBER"
+      position: "47-50"
+      length: 4
+      type: "A/N"
+      description: "Identifies the terminal number"
+      iso_field: "41[5-8]"
+
+    - number: 9
+      name: "card_acceptor_id"
+      display_name: "CARD ACCEPTOR ID"
+      position: "51-65"
+      length: 15
+      type: "A/N"
+      description: "Name of the card acceptor operating the point of sale"
+      iso_field: "42"
+
+    - number: 10
+      name: "merchant_name"
+      display_name: "MERCHANT NAME"
+      position: "66-90"
+      length: 25
+      type: "A/N"
+      description: "Name of the merchant (or Sub-Merchant for Payment Facilitators)"
+
+    - number: 11
+      name: "card_acceptor_city"
+      display_name: "CARD ACCEPTOR CITY"
+      position: "91-108"
+      length: 18
+      type: "A/N"
+      description: "City where cardholder transaction occurs"
+      iso_field: "43[26-38]"
+
+    - number: 12
+      name: "card_acceptor_state"
+      display_name: "CARD ACCEPTOR STATE"
+      position: "109-110"
+      length: 2
+      type: "A/N"
+      description: "State where cardholder transaction occurs"
+      iso_field: "43[39-40]"
+
+    - number: 13
+      name: "card_acceptor_country_code"
+      display_name: "CARD ACCEPTOR COUNTRY CODE"
+      position: "111-112"
+      length: 2
+      type: "A/N"
+      description: "Country where cardholder transaction occurs"
+      iso_field: "20"
+
+    - number: 14
+      name: "country_code_pan_extended"
+      display_name: "COUNTRY CODE PAN EXTENDED"
+      position: "113-115"
+      length: 3
+      type: "A/N"
+      description: "Code in card's magnetic stripe identifying country of card issuer institution"
+      iso_field: "20"
+
+    - number: 15
+      name: "national_pos_geographic_data"
+      display_name: "NATIONAL POS GEOGRAPHIC DATA"
+      position: "116-129"
+      length: 14
+      type: "A/N"
+      description: "Identifies the location of the cardholder transaction"
+      iso_field: "59"
+      subfields:
+        - name: "state_code"
+          position: "116-117"
+          length: 2
+        - name: "county_code"
+          position: "118-120"
+          length: 3
+        - name: "postal_code"
+          position: "121-129"
+          length: 9
+
+    - number: 16
+      name: "mcc_code"
+      display_name: "MCC CODE"
+      position: "130-133"
+      length: 4
+      type: "N"
+      description: "Merchant category code describing merchant's type of business"
+      iso_field: "18"
+
+    - number: 17
+      name: "merchant_aba_number"
+      display_name: "MERCHANT ABA NUMBER"
+      position: "134-142"
+      length: 9
+      type: "A/N"
+      description: "Identifies the Merchant ABA Number"
+      iso_field: "63.10[5-13]"
+      notes: "Zero to nine characters, identifies merchant to direct debit switch"
+
+    - number: 18
+      name: "card_acceptor_settlement_agent"
+      display_name: "CARD ACCEPTOR SETTLEMENT AGENT"
+      position: "143-146"
+      length: 4
+      type: "A/N"
+      description: "Identifies the financial institution"
+      iso_field: "63.10[1-4]"
+
+    - number: 19
+      name: "iso_source_station_id"
+      display_name: "ISO SOURCE STATION ID"
+      position: "147-152"
+      length: 6
+      type: "N"
+      description: "Identifies the originator of ISO request message"
+
+    - number: 20
+      name: "acquirer_business_id"
+      display_name: "ACQUIRER BUSINESS ID"
+      position: "153-160"
+      length: 8
+      type: "A/N"
+      description: "Identifies the VISA assigned Acquirer Business ID"
+      iso_field: "63.8"
+
+    - number: 21
+      name: "acquirer_country_code"
+      display_name: "ACQUIRER COUNTRY CODE"
+      position: "161-163"
+      length: 3
+      type: "A/N"
+      description: "Identifies the country of the acquiring institution for the merchant"
+      iso_field: "19"
+
+    - number: 22
+      name: "card_type"
+      display_name: "CARD TYPE"
+      position: "164"
+      length: 1
+      type: "A/N"
+      description: "Identifies the card plan type"
+      valid_values:
+        "3": "American Express"
+        "4": "Visa"
+        "5": "Mastercard"
+        "7": "JCB"
+        "8": "Discover"
+        "9": "Other"
+        "P": "PayPal"
+        " ": "Unknown/not identified"
+      notes: "For credit, ADF Field 84 NID='NULL' or '0002'. For debit, Field 84 NID not='NULL' and not='0002'"
+
+    - number: 23
+      name: "primary_account_number"
+      display_name: "PRIMARY ACCOUNT NUMBER"
+      position: "165-186"
+      length: 22
+      type: "A/N"
+      description: "Identifies the primary account number"
+      iso_field: "2"
+      notes: "Will be masked if configured as such"
+
+    - number: 24
+      name: "ext_pan"
+      display_name: "EXT PAN"
+      position: "187-214"
+      length: 28
+      type: "A/N"
+      description: "Used for numeric account numbers or numbers encoded on track 3"
+      iso_field: "34"
+      notes: "May contain cardholder ID number. Will be masked if configured as such"
+
+    - number: 25
+      name: "account_id_1"
+      display_name: "ACCOUNT ID 1"
+      position: "215-242"
+      length: 28
+      type: "A/N"
+      description: "Used for check transactions or Mastercard PayPass Primary Account Number"
+      iso_field: "102"
+      notes: "Will be masked if configured as such"
+
+    - number: 26
+      name: "card_expiration_date"
+      display_name: "CARD EXPIRATION DATE"
+      position: "243-246"
+      length: 4
+      type: "N"
+      description: "Identifies the card expiration date"
+      format: "YYMM"
+      iso_field: "14"
+
+    - number: 27
+      name: "issuing_institution_station_id"
+      display_name: "ISSUING INSTITUTION STATION ID"
+      position: "247-252"
+      length: 6
+      type: "A/N"
+      description: "Identifies the endpoint that introduced the message into the network"
+      iso_field: "Header field 6"
+
+    - number: 28
+      name: "issuing_institution_id_code"
+      display_name: "ISSUING INSTITUTION ID CODE"
+      position: "253-263"
+      length: 11
+      type: "A/N"
+      description: "Identifies the Issuer ID of the cardholder's account"
+      iso_field: "121"
+
+    - number: 29
+      name: "julian_day"
+      display_name: "JULIAN DAY"
+      position: "264-266"
+      length: 3
+      type: "N"
+      description: "Identifies the Julian day of the year"
+      format: "DDD"
+      notes: "Number representing ordinal position of transaction date (e.g., December 30 in non-leap year = 364)"
+
+    - number: 30
+      name: "transaction_date_time"
+      display_name: "TRANSACTION DATE TIME"
+      position: "267-285"
+      length: 19
+      type: "A/N"
+      description: "Identifies the date and time stamp of a transaction based on GMT"
+      format: "YYYY-MM-DD HH:MM:SS"
+
+    - number: 31
+      name: "settlement_date"
+      display_name: "SETTLEMENT DATE"
+      position: "286-289"
+      length: 4
+      type: "N"
+      description: "Identifies the month and day for settlement between acquirer and issuer"
+      format: "MMDD"
+      iso_field: "15"
+
+    - number: 32
+      name: "load_date_time"
+      display_name: "LOAD DATE TIME"
+      position: "290-308"
+      length: 19
+      type: "A/N"
+      description: "Identifies the load date and time (GMT) that a transaction was loaded into the report by a third party only"
+      format: "YYYY-MM-DD HH:MM:SS"
+
+    - number: 33
+      name: "message_type"
+      display_name: "MESSAGE TYPE"
+      position: "309-312"
+      length: 4
+      type: "A/N"
+      description: "Defines ISO request type messages"
+      valid_values:
+        "0100": "Authorization request"
+        "0200": "Authorization request"
+        "0400": "Authorization request"
+        "0420": "Authorization request"
+        "0120": "AFD advice messages indicating final amount dispensed"
+      notes: "Messages from endpoint to card issuer for authorization and verification requests"
+
+    - number: 34
+      name: "processing_code"
+      display_name: "PROCESSING CODE"
+      position: "313-318"
+      length: 6
+      type: "N"
+      description: "Identifies the cardholder transaction type and account types"
+      iso_field: "3"
+      subfields:
+        - name: "transaction_type"
+          position: "313-314"
+          length: 2
+          valid_values:
+            "00": "Purchase"
+            "01": "Cash Advance"
+            "02": "Debit Adjustment"
+            "20": "Return/Credit"
+            "21": "Deposit"
+            "22": "Credit Adjustment"
+            "30": "Balance Inquiry"
+            "31": "Statement Request"
+            "38": "Card Verification"
+            "40": "Transfer"
+            "50": "Payment"
+            "90": "Administrative Message"
+        - name: "from_account"
+          position: "315-316"
+          length: 2
+          valid_values:
+            "00": "Default"
+            "10": "Savings Account"
+            "20": "Checking Account"
+            "30": "Credit Card Account"
+            "40": "Universal Account"
+            "50": "Investment Account"
+            "60": "Stored Value Account"
+            "90": "Cash Card Account"
+        - name: "to_account"
+          position: "317-318"
+          length: 2
+          valid_values:
+            "00": "Default"
+            "10": "Savings Account"
+            "20": "Checking Account"
+            "30": "Credit Card Account"
+            "40": "Universal Account"
+            "50": "Investment Account"
+            "60": "Stored Value Account"
+            "90": "Cash Card Account"
+
+    - number: 35
+      name: "access_method"
+      display_name: "ACCESS METHOD"
+      position: "319-320"
+      length: 2
+      type: "A/N"
+      description: "Identifies the method used to access the account"
+      valid_values:
+        "00": "Not specified"
+        "01": "Card"
+        "02": "Terminal"
+        "03": "Mail"
+        "04": "Telephone"
+        "05": "Standing order"
+        "06": "Electronic order"
+        "07": "Debit card"
+        "08": "Check"
+        "09": "Credit card"
+        "10": "Charge card"
+        "11": "Deferred debit card"
+        "12": "Prepaid card"
+        "13": "Mobile device"
+        "14": "Electronic commerce"
+        "15": "Automated clearing house"
+        "16": "Signature debit"
+        "17": "PIN debit"
+
+    - number: 36
+      name: "ascii_bill_code"
+      display_name: "ASCII BILL CODE"
+      position: "321"
+      length: 1
+      type: "A/N"
+      description: "ASCII Bill Code"
+      valid_values:
+        "0": "No bill payment"
+        "1": "Bill payment"
+        "2": "Bill payment with cash back"
+        "3": "Bill payment with PIN"
+        "4": "Bill payment with PIN and cash back"
+
+    - number: 37
+      name: "transaction_identifier"
+      display_name: "TRANSACTION IDENTIFIER"
+      position: "322"
+      length: 1
+      type: "A/N"
+      description: "Transaction Identifier"
+      valid_values:
+        "Y": "Transaction identified"
+        "N": "Transaction not identified"
+      iso_fields:
+        visa: "63.11"
+        mc_discover_paypal_amex: "63.12"
+
+    - number: 38
+      name: "retrieval_reference_number"
+      display_name: "RETRIEVAL REFERENCE NUMBER"
+      position: "337-348"
+      length: 12
+      type: "A/N"
+      description: "Retrieval Reference Number"
+      iso_field: "37"
+
+    - number: 39
+      name: "systems_trace_audit_number"
+      display_name: "SYSTEMS TRACE AUDIT NUMBER"
+      position: "349-354"
+      length: 6
+      type: "N"
+      description: "Systems Trace Audit Number"
+      iso_field: "11"
+
+    - number: 40
+      name: "authorized_amount"
+      display_name: "AUTHORIZED AMOUNT"
+      position: "355-366"
+      length: 12
+      type: "N"
+      description: "Authorized Amount"
+      iso_field: "4"
+
+    - number: 41
+      name: "cardholder_billing_amount"
+      display_name: "CARDHOLDER BILLING AMOUNT"
+      position: "367-378"
+      length: 12
+      type: "N"
+      description: "Cardholder Billing Amount"
+      iso_field: "6"
+
+    - number: 42
+      name: "approval_code"
+      display_name: "APPROVAL CODE"
+      position: "379-384"
+      length: 6
+      type: "A/N"
+      description: "Approval Code"
+      iso_field: "38"
+
+    - number: 43
+      name: "authorization_response"
+      display_name: "AUTHORIZATION RESPONSE"
+      position: "385-386"
+      length: 2
+      type: "A/N"
+      description: "Authorization Response"
+      iso_field: "39"
+
+    - number: 44
+      name: "internal_error_code"
+      display_name: "INTERNAL ERROR CODE"
+      position: "387"
+      length: 1
+      type: "A/N"
+      description: "Internal Error Code"
+
+    - number: 45
+      name: "iso_reject_code"
+      display_name: "ISO REJECT CODE"
+      position: "388-391"
+      length: 4
+      type: "A/N"
+      description: "ISO Reject Code"
+
+    - number: 46
+      name: "cvv2_cvc2_cid_response_type"
+      display_name: "CVV2 / CVC2 / CID RESPONSE TYPE"
+      position: "392"
+      length: 1
+      type: "A/N"
+      description: "CVV2/CVC2/CID Response Type"
+      valid_values:
+        "0": "Not verified"
+        "1": "Verified"
+
+    - number: 47
+      name: "cvv2_cvc2_cid_presence_indicator"
+      display_name: "CVV2 / CVC2 / CID PRESENCE INDICATOR"
+      position: "393"
+      length: 1
+      type: "A/N"
+      description: "CVV2/CVC2/CID Presence Indicator"
+      valid_values:
+        "0": "CVV2 value is deliberately bypassed or is not provided by the merchant"
+        "1": "CVV2 value is present"
+        "2": "CVV2 is on the card but is illegible"
+        "9": "Cardholder states that the card does not have a CVV2 imprint"
+
+    - number: 48
+      name: "message_reason_code"
+      display_name: "MESSAGE REASON CODE"
+      position: "394-397"
+      length: 4
+      type: "A/N"
+      description: "Message Reason Code - Supports multiple usages for Reversal Messages and Visa Merchant Initiated Transactions"
+      valid_values:
+        # Reversal Messages
+        "2501": "Transaction voided by customer"
+        "2502": "Transaction has not completed (Request timed out or POS device malfunctioned)"
+        "2503": "No confirmation from the point of sale"
+        "2504": "POS partial reversal"
+        "2516": "Premature chip card removal (after online request sent before response received)"
+        "2517": "Chip declined transaction after online issuer approved"
+        # Visa Merchant Initiated Transactions (MIT)
+        "3900": "Incremental Authorization"
+        "3901": "Resubmission"
+        "3902": "Delayed Charges"
+        "3903": "Reauthorization"
+        "3904": "No Show"
+
+    - number: 49
+      name: "additional_response_data"
+      display_name: "ADDITIONAL RESPONSE DATA"
+      position: "398-422"
+      length: 25
+      type: "A/N/S"
+      description: "Contains miscellaneous response message data. TSYS Acquiring Solutions uses this field and its sub-fields for special codes"
+      iso_field: "44"
+      subfields:
+        - name: "response_source_reason_code"
+          position: "398"
+          length: 1
+          iso_field: "44.1"
+          description: "Response/Source reason code"
+
+        - name: "address_verification_result_code"
+          position: "399"
+          length: 1
+          iso_field: "44.2"
+          description: "Address verification result code"
+
+        - name: "reserved_1"
+          position: "400"
+          length: 1
+          iso_field: "44.3"
+          description: "Reserved, space filled"
+
+        - name: "reserved_2"
+          position: "401"
+          length: 1
+          iso_field: "44.4"
+          description: "Reserved, space filled"
+
+        - name: "cvv_cvc1_cvc3_results_code"
+          position: "402"
+          length: 1
+          iso_field: "44.5"
+          description: "CVV, CVC1/ CVC3 Results Code"
+
+        - name: "reserved_3"
+          position: "403-404"
+          length: 2
+          iso_field: "44.6"
+          description: "Reserved, space filled"
+
+        - name: "reserved_4"
+          position: "405"
+          length: 1
+          iso_field: "44.7"
+          description: "Reserved, space filled"
+
+        - name: "card_authentication_results_code"
+          position: "406"
+          length: 1
+          iso_field: "44.8"
+          description: "Card authentication results code"
+
+        - name: "reserved_5"
+          position: "407"
+          length: 1
+          iso_field: "44.9"
+          description: "Reserved, space filled"
+
+        - name: "cvv2_cvc2_cid_results_code"
+          position: "408"
+          length: 1
+          iso_field: "44.10"
+          description: "CVV2/CVC2/CID results code"
+
+        - name: "reserved_6"
+          position: "409-410"
+          length: 2
+          iso_field: "44.11"
+          description: "Reserved, space filled"
+
+        - name: "check_settlement_code"
+          position: "411"
+          length: 1
+          iso_field: "44.12"
+          description: "Check settlement code"
+
+        - name: "cavv_result_code"
+          position: "412"
+          length: 1
+          iso_field: "44.13"
+          description: "CAVV result code"
+
+        - name: "merchant_advice_code"
+          position: "413-416"
+          length: 4
+          iso_field: "44.14"
+          description: "Merchant Advice Code (MC)"
+
+        - name: "card_brand_token_pan_last_digits"
+          position: "417-420"
+          length: 4
+          iso_field: "44.15"
+          description: "Card Brand Token PAN Last Digits"
+
+        - name: "reserved_7"
+          position: "421"
+          length: 1
+          iso_field: "44.16"
+          description: "Reserved, space filled"
+
+        - name: "reserved_8"
+          position: "422"
+          length: 1
+          iso_field: "N/A"
+          description: "Reserved, space filled"
+
+    - number: 50
+      name: "request_aci"
+      display_name: "REQUEST ACI"
+      position: "423"
+      length: 1
+      type: "A/S"
+      description: "Identifies if a transaction requested CPS qualification when it was sent by the merchant"
+      iso_field: "62.1"
+      notes: "Refer to ISO field 62.1 authorization characteristics indicators for possible values"
+
+    - number: 51
+      name: "return_aci"
+      display_name: "RETURN ACI"
+      position: "424"
+      length: 1
+      type: "A/S"
+      description: "Identifies the response to the ACI Request"
+      iso_field: "62.1"
+      notes: "Refer to ISO field 62.1 authorization characteristics indicators for possible values"
+
+    - number: 52
+      name: "validation_code"
+      display_name: "VALIDATION CODE"
+      position: "425-428"
+      length: 4
+      type: "A/N"
+      description: "Identifies a Visa calculated code in the authorization message to ensure that key fields match their respective fields in the Visa BASE II clearing message. For Discover and PayPal transactions, contains the Track Data Condition Code utilizing the first 2 bytes of the field"
+      iso_field: "62.3"
+
+    - number: 53
+      name: "product_type_identification"
+      display_name: "PRODUCT TYPE IDENTIFICATION"
+      position: "429-430"
+      length: 2
+      type: "A/N"
+      description: "Product Type Identification"
+      iso_field: "62.23"
+      notes: "Refer to Appendix A, Table A.12 for values"
+
+    - number: 54
+      name: "transaction_source_flag"
+      display_name: "TRANSACTION SOURCE FLAG"
+      position: "431-433"
+      length: 3
+      type: "N"
+      description: "Identifies the Telecom provider for authorizations handled through TSYS Acquiring Solutions"
+      data_source: "TSYS Internal"
+
+    - number: 55
+      name: "var_track_id"
+      display_name: "VAR TRACK ID"
+      position: "434-443"
+      length: 10
+      type: "A/N"
+      description: "Identifies the Developer ID for the transaction"
+      data_source: "TSYS Internal"
+
+    - number: 56
+      name: "vendor_id"
+      display_name: "VENDOR ID"
+      position: "444-448"
+      length: 5
+      type: "N"
+      description: "Identifies the Vendor ID for the transaction"
+      data_source: "TSYS Internal"
+
+    - number: 57
+      name: "pos_entry_mode"
+      display_name: "POS ENTRY MODE"
+      position: "449-452"
+      length: 4
+      type: "A/N"
+      description: "Identifies the actual method to capture the account number and expiration date when a terminal is used and the terminal's PIN capture capability"
+      iso_field: "22"
+      notes: "Refer to ISO field 22 POS entry mode codes for values"
+
+    - number: 58
+      name: "isa_charge_indicator"
+      display_name: "ISA Charge Indicator"
+      position: "453"
+      length: 1
+      type: "A/N"
+      description: "Indicates that the Visa ISA charge was assessed"
+      iso_field: "63.21"
+
+    - number: 59
+      name: "amex_cardholder_verification_results"
+      display_name: "AMEX Cardholder Verification Results"
+      position: "454-462"
+      length: 9
+      type: "ANS"
+      description: "Bytes 1-5: Verification codes received from AMEX in authorization response. Refer to Appendix A, Table A.11 for possible values. Bytes 6-9: Reserved. Space filled"
+      iso_field: "116"
+
+    - number: 60
+      name: "pos_condition_code"
+      display_name: "POS CONDITION CODE"
+      position: "463-464"
+      length: 2
+      type: "A/N"
+      description: "Identifies transaction conditions at the point of sale or point of service"
+      iso_field: "25"
+      valid_values:
+        "00": "Normal transaction of this type"
+        "01": "Cardholder not present"
+        "02": "Unattended terminal, customer operated (for example, an Automated Dispensing Machine)"
+        "03": "Merchant suspicious of transaction (or card)"
+        "05": "Customer present, card not present"
+        "06": "Pre-authorization"
+        "08": "Mail/telephone order (includes Visa Phone and reoccurring transactions)"
+        "10": "Customer identity verified (used for Check Acceptance only)"
+        "51": "Request for account number verification without authorization; or request for account number verification and address verification without authorization"
+        "59": "e-Commerce request (through public network)"
+        "71": "Card present, magnetic stripe cannot be read (key-entered)"
+        "73": "Recurring transaction (original transaction was token-based with valid cryptogram; Mastercard only)"
+
+    - number: 61
+      name: "additional_data_private_request"
+      display_name: "ADDITIONAL DATA PRIVATE REQUEST"
+      position: "465-484"
+      length: 20
+      type: "A/N"
+      description: "The following table defines the usage code key for all private requests for additional data"
+      iso_field: "48"
+      valid_values:
+        "2": {"indicator": "*", "bytes": 1, "description": "Unformatted text in authorization or reversal messages"}
+        "3": {"indicator": "*", "bytes": 1, "description": "Error reason text in check acceptance response"}
+        "4": {"indicator": "N/A", "bytes": 0, "description": "Network connectivity type messages"}
+        "5": {"indicator": "@", "bytes": 1, "description": "Dial terminal information"}
+        "6": {"indicator": "@", "bytes": 1, "description": "Check acceptance information"}
+        "7": {"indicator": "N/A", "description": "This field should not be used unless instructed by the TSYS Acquiring Solutions Implementation Manager"}
+        "10": {"indicator": "$", "bytes": 1, "description": "Mastercard Corporate Fleet Card data"}
+        "11": {"indicator": "!01", "bytes": 3, "description": "Visa Commercial Card request"}
+        "12": {"indicator": "$$", "bytes": 2, "description": "Purchasing Card fleet service"}
+        "14": {"description": "Reserved for TSYS Acquiring Solutions"}
+        "32": {"indicator": "EB", "bytes": 2, "description": "Integrated Food and Consumer Service (FCS) ID"}
+        "33": {"indicator": "VN", "bytes": 2, "description": "Voucher Serial Number and EBT FCS ID"}
+
+    - number: 62
+      name: "additional_data_private_response"
+      display_name: "ADDITIONAL DATA PRIVATE RESPONSE"
+      position: "485-504"
+      length: 20
+      type: "A/N"
+      description: "Mapping is same as ADDITIONAL DATA PRIVATE REQUEST (see above table)"
+      iso_field: "48"
+
+    - number: 63
+      name: "supporting_information"
+      display_name: "SUPPORTING INFORMATION"
+      position: "505-564"
+      length: 60
+      type: "A/N/S"
+      description: "Private use field with the following usages"
+      iso_field: "125"
+      valid_values:
+        "1": "Reserved for future use"
+        "2": "Reserved for future use"
+        "3": "Reserved for future use"
+        "4": "Reserved for future use"
+        "5": "Reserved for future use"
+        "7": "Reserved for future use"
+
+    - number: 64
+      name: "duration"
+      display_name: "DURATION"
+      position: "565-566"
+      length: 2
+      type: "A/N"
+      description: "Identifies the number of days (from 01 through 99) anticipated for the auto rental or hotel stay"
+      iso_field: "62.5"
+
+    - number: 65
+      name: "market_specific_data_indicator"
+      display_name: "MARKET SPECIFIC DATA INDICATOR"
+      position: "567"
+      length: 1
+      type: "A/N"
+      description: "Identifies the industry for which market specific data has been provided"
+      iso_field: "62.4"
+      valid_values:
+        "A": "Auto rental"
+        "H": "Hotel"
+        "B": "Bill payment"
+        "M": "Healthcare"
+        "T": "Transit"
+        "N": "Failed cps market data edit"
+        "E": "eCommerce Transaction Aggregation"
+        "J": "B2B Invoice Payments"
+
+    - number: 66
+      name: "cash_back_amount"
+      display_name: "CASH BACK AMOUNT"
+      position: "568-579"
+      length: 12
+      type: "N"
+      description: "Identifies the cash back amount"
+      iso_field: "61.1[1-12]"
+
+    - number: 67
+      name: "cardholder_billing_conversion_rate"
+      display_name: "CARDHOLDER BILLING CONVERSION RATE"
+      position: "580-588"
+      length: 9
+      type: "N"
+      description: "Identifies a calculated value that represents a factor that may be applied to the transaction amount to obtain the cardholder billing amount"
+      iso_field: "10"
+
+    - number: 68
+      name: "cardholder_billing_currency_code"
+      display_name: "CARDHOLDER BILLING CURRENCY CODE"
+      position: "589-591"
+      length: 3
+      type: "A/N"
+      description: "Contains a three character numeric code identifying the currency used by the Issuer to bill the cardholder's account"
+      iso_field: "51"
+      notes: "Refer to Currency Codes for a list of currency codes"
+
+    - number: 69
+      name: "request_additional_amount"
+      display_name: "REQUEST ADDITIONAL AMOUNT"
+      position: "592-611"
+      length: 20
+      type: "A/N"
+      description: "Identifies account balance information for ATM balance inquiries, cash disbursements, or available credit balance inquiries"
+      iso_field: "54"
+      subfields:
+        - name: "length"
+          position: "592"
+          length: 1
+          description: "Length"
+        - name: "account_type"
+          position: "593-594"
+          length: 2
+          description: "Account type"
+        - name: "amount_type"
+          position: "595-596"
+          length: 2
+          description: "Amount type"
+        - name: "currency_code"
+          position: "597-599"
+          length: 3
+          description: "Currency code"
+        - name: "amount_sign"
+          position: "600"
+          length: 1
+          description: "Amount sign"
+        - name: "amount"
+          position: "601-611"
+          length: 11
+          description: "Amount"
+
+    - number: 70
+      name: "mastercard_assigned_id"
+      display_name: "Mastercard Assigned ID"
+      position: "612-617"
+      length: 6
+      type: "A/N"
+      description: "Identifies the merchant as participating in Mastercard's private label program or as IIAS compliant for healthcare transactions"
+      data_source: "TSYS Internal"
+
+    - number: 71
+      name: "mastercard_iias_indicator"
+      display_name: "Mastercard IIAS Indicator"
+      position: "618"
+      length: 1
+      type: "N"
+      description: "0 - Merchant terminal did not verify the purchased items against an IIAS\n1 - Merchant terminal verified the purchase items against an IIAS\n2- Merchant claims exemption from IIAS based on the 90 percent rule"
+      iso_field: "126.19"
+
+    - number: 72
+      name: "response_additional_amount"
+      display_name: "RESPONSE ADDITIONAL AMOUNT"
+      position: "619-638"
+      length: 20
+      type: "A/N"
+      description: "Identifies the response information for account balance information for ATM balance inquiries, cash disbursements, or available credit balance inquiries. Refer to Field 69 Description (above) for field layout"
+      iso_field: "54"
+
+    - number: 73
+      name: "replacement_amounts"
+      display_name: "REPLACEMENT AMOUNTS"
+      position: "639-650"
+      length: 12
+      type: "A/N"
+      description: "Identifies the corrected amount of a transaction if a partial reversal was completed"
+      iso_field: "95"
+
+    - number: 74
+      name: "xid"
+      display_name: "XID"
+      position: "651-690"
+      length: 40
+      type: "A/N"
+      description: "Identifies the unique VSEC transaction ID generated by the merchant server to identify the transaction"
+      iso_field: "126.8"
+
+    - number: 75
+      name: "ucaf_collection_indicator"
+      display_name: "UCAF COLLECTION INDICATOR"
+      position: "691"
+      length: 1
+      type: "A/N"
+      description: "Applies to Mastercard (MC) transactions. Values map to MC authorization requests, if the Acquirer submits this field"
+      iso_field: "126.15"
+
+    - number: 76
+      name: "transaction_currency_code"
+      display_name: "TRANSACTION CURRENCY CODE"
+      position: "692-694"
+      length: 3
+      type: "A/N"
+      description: "Identifies a three-character code used to define the currency of the transaction. It is also used to determine the number of decimal places for ISO fields 4, 61.1 and 95.1"
+      iso_field: "49"
+      notes: "Refer to Currency Codes for a list of currency codes"
+
+    - number: 77
+      name: "gateway_currency_code"
+      display_name: "GATEWAY CURRENCY CODE"
+      position: "695-697"
+      length: 3
+      type: "A/N"
+      description: "Identifies a three-character code used to define the currency code of the gateway"
+      data_source: "TSYS Internal"
+      notes: "Refer to Currency Codes for a list of currency codes"
+
+    - number: 78
+      name: "gateway_country_code"
+      display_name: "GATEWAY COUNTRY CODE"
+      position: "698-700"
+      length: 3
+      type: "A/N"
+      description: "Identifies the country code of the gateway that processed the transaction"
+      data_source: "TSYS Internal"
+
+    - number: 79
+      name: "receiving_institution_country_code"
+      display_name: "RECEIVING INSTITUTION COUNTRY CODE"
+      position: "701-703"
+      length: 3
+      type: "N"
+      description: "Identifies the country where the Receiving Institution is located"
+      iso_field: "68"
+
+    - number: 80
+      name: "sharing_group"
+      display_name: "SHARING GROUP"
+      position: "704-733"
+      length: 30
+      type: "A/N/S"
+      description: "Optionally used by POS priority selection participants to validate the network access priority and determine the routing of the financial POS requests"
+      iso_field: "63.12"
+      notes: "Refer to Appendix A Table A.9 for a list of codes"
+
+    - number: 81
+      name: "giv"
+      display_name: "GIV"
+      position: "734"
+      length: 1
+      type: "A/N"
+      description: "Identifies the Gross Interchange Value and is set by VISA"
+      data_source: "TSYS Internal"
+      valid_values:
+        "@": "Transaction has financial impact and will be included in the appropriate settlement accumulation during processing of the request/response or advice/advice-response message pair"
+        " ": "The transaction is ineligible for settlement processing"
+
+    - number: 82
+      name: "reimbursement_attribute"
+      display_name: "REIMBURSEMENT ATTRIBUTE"
+      position: "735"
+      length: 1
+      type: "A/N/S"
+      description: "Identifies a code that represents the applicable interchange reimbursement fee for a purchase transaction"
+      iso_field: "63.11"
+
+    - number: 83
+      name: "receiving_institution_id_code"
+      display_name: "RECEIVING INSTITUTION ID CODE"
+      position: "736-746"
+      length: 11
+      type: "A/N"
+      description: "Identifies a message routing code which identifies the institution that should receive a request or advice"
+      iso_field: "100"
+
+    - number: 84
+      name: "network_id"
+      display_name: "NETWORK ID"
+      position: "747-750"
+      length: 4
+      type: "N"
+      description: "Identifies the Network ID that was used for the transmission of the message"
+      iso_field: "63.1"
+      valid_values:
+        "0003": "Interlink"
+        "0004": "Plus ATM"
+        "0006": "Cirrus ATM"
+        "0007": "Mastercard ATM"
+        "0008": "STAR"
+        "0009": "PULSE"
+        "0010": "STAR Southeast"
+        "0011": "STAR Northeast"
+        "0012": "STAR West"
+        "0013": "AFFN®"
+        "0015": "STAR"
+        "0016": "Maestro®"
+        "0017": "Pulse®"
+        "0018": "NYCE"
+        "0019": "PULSE"
+        "0020": "Accel®"
+        "0023": "NETS"
+        "0024": "CU24"
+        "0027": "NYCE"
+        "0028": "Shazam™ (ITS)"
+        "0029": "EBT"
+        "0030": "EBT ATM"
+        "0040": "Amex ATM"
+        "0041": "Discover ATM"
+        "0042": "AFFN ATM"
+        "0053": "Fifth Third (TSYS assigned value)"
+        "0777": "Visa Check Card II (TSYS assigned value)"
+        "1001": "Evertech (TSYS assigned value)"
+
+    - number: 85
+      name: "transaction_data"
+      display_name: "Transaction Data"
+      position: "751-762"
+      length: 12
+      type: "A/N"
+      description: "Identifies values containing information extracted from the second generation request messages"
+      data_source: "TSYS Internal"
+      subfields:
+        # Gen2 Definitions For Terminal Capture
+        - name: "format_identifier"
+          position: "751"
+          length: 1
+          description: "Format Identifier"
+          notes: "When Field 85 position 1, Format Identifier, is not equal to 'H', 'S' or 'X'"
+
+        - name: "application_type"
+          position: "752"
+          length: 1
+          description: "Application type"
+
+        - name: "device_code"
+          position: "753"
+          length: 1
+          description: "Device Code"
+
+        - name: "industry_code"
+          position: "754"
+          length: 1
+          description: "Industry Code"
+
+        - name: "transaction_sequence_number"
+          position: "755-758"
+          length: 4
+          description: "Transaction Sequence Number"
+
+        - name: "transaction_code"
+          position: "759-760"
+          length: 2
+          description: "Transaction Code"
+
+        - name: "customer_identification_code"
+          position: "761"
+          length: 1
+          description: "Customer Identification Code (CID)"
+
+        - name: "account_data_source"
+          position: "762"
+          length: 1
+          description: "Account Data Source (ADSC)"
+
+        # SGMF Definition For Host Capture
+        - name: "sgmf_format_identifier"
+          position: "751"
+          length: 1
+          description: "Format Identifier always and exclusively 'H' for host capture"
+          notes: "When Field 85 position 1, Format Identifier, is equal to 'H'"
+
+        - name: "sgmf_app_type"
+          position: "752"
+          length: 1
+          description: "App type - 0 is single tran, 2 is multi tran, 4 is interleaved"
+
+        - name: "sgmf_transaction_code"
+          position: "753-754"
+          length: 2
+          description: "SGMF Transaction code"
+
+        - name: "sgmf_program_code"
+          position: "755"
+          length: 1
+          description: "SGMF Program code"
+
+        - name: "sgmf_payment_code"
+          position: "756"
+          length: 1
+          description: "SGMF Payment code"
+
+        - name: "last_ton"
+          position: "757-760"
+          length: 4
+          description: "Last 4 of TON"
+
+        - name: "space_filled"
+          position: "761-762"
+          length: 2
+          description: "Space Filled"
+
+        # Apex Definitions
+        - name: "apex_format_identifier"
+          position: "751"
+          length: 1
+          description: "Format Identifier always and exclusively 'S' for Apex"
+          notes: "When Field 85 position 1, Format Identifier, is equal to 'S'"
+
+        - name: "header_message_type"
+          position: "752"
+          length: 1
+          description: "Header Message Type"
+
+        - name: "header_message_subtype"
+          position: "753"
+          length: 1
+          description: "Header Message Subtype"
+
+        - name: "header_transaction_code"
+          position: "754-755"
+          length: 2
+          description: "Header Transaction Code"
+
+        - name: "header_transmission_number"
+          position: "756-757"
+          length: 2
+          description: "Header Transmission Number"
+
+        - name: "fid_sequence_number"
+          position: "758-761"
+          length: 4
+          description: "FID h Sequence Number - last four digits"
+
+        - name: "fid_draft_capture_flag"
+          position: "762"
+          length: 1
+          description: "FID P Draft Capture Flag"
+
+        # Apex XML Definitions
+        - name: "apex_xml_format_identifier"
+          position: "751"
+          length: 1
+          description: "Format Identifier always and exclusively 'X' for Apex XML"
+          notes: "When Field 85 position 1, Format Identifier, is equal to 'X'"
+
+        - name: "reserved"
+          position: "752-762"
+          length: 11
+          description: "Reserved"
+
+    - number: 86
+      name: "transaction_fee_amount"
+      display_name: "TRANSACTION FEE AMOUNT"
+      position: "763-771"
+      length: 9
+      type: "A/N"
+      description: "Identifies a destination assessed PIN POS and credit transaction surcharge fee in the transaction amount currency for information only"
+      iso_field: "28"
+
+    - number: 87
+      name: "prestigious_property_indicator"
+      display_name: "PRESTIGIOUS PROPERTY INDICATOR"
+      position: "772"
+      length: 1
+      type: "A"
+      description: "Identifies an indicator used by CPS Acquirers in the VISA USA prestigious lodging program to identify a property floor limit"
+      iso_field: "62.6"
+      valid_values:
+        "D": "Prestigious property with US $500 limit"
+        "B": "Prestigious property with US $1000 limit"
+        "S": "Prestigious property with US $1500 limit"
+
+    - number: 88
+      name: "pre_auth_time_limit"
+      display_name: "PRE AUTH TIME LIMIT"
+      position: "773-776"
+      length: 4
+      type: "A/N"
+      description: "Includes the time frame that funds will be held for a pre-authorization transaction before the completion transaction is finished. This field only applies to pre-authorization and completion transactions, otherwise it will be omitted"
+      iso_field: "63.2"
+
+    - number: 89
+      name: "forwarding_institution_country_code"
+      display_name: "FORWARDING INSTITUTION COUNTRY CODE"
+      position: "777-779"
+      length: 3
+      type: "A/N"
+      description: "Identifies the country of the forwarding institution"
+      iso_field: "21"
+
+    - number: 90
+      name: "dial_pay_authorization_call_type"
+      display_name: "DIAL PAY AUTHORIZATION CALL TYPE"
+      position: "780-781"
+      length: 2
+      type: "A/N"
+      description: "Specifies the type of Dial-Pay authorization that was processed. TSYS Acquiring Solutions uses this value to segregate and accumulate Dial-Pay authorizations for merchant billing purposes"
+      data_source: "TSYS Internal"
+      valid_values:
+        " ": "not a Dial-Pay Authorization"
+        "IV": "IVR"
+        "VC": "VOICE"
+        "RF": "REFERRAL"
+        "OT": "OTHER"
+        "CR": "CREDIT"
+        "VD": "VOID"
+        "BT": "BATCH TOTALS"
+        "OF": "OFFLINE"
+        "DC": "DROPPED CALL"
+        "BH": "BATCH HISTORY"
+        "BR": "BATCH REVIEW"
+        "LT": "BATCH FIND"
+
+    - number: 91
+      name: "digital_entity_identifier"
+      display_name: "Digital Entity Identifier"
+      position: "782-786"
+      length: 5
+      type: "A/N"
+      description: "A unique identifier that is assigned by Visa at the time of authorization that identifies transactions that originate from Visa Checkout"
+      iso_field: "126.18"
+
+    - number: 92
+      name: "reserved"
+      display_name: "Reserved"
+      position: "787-798"
+      length: 12
+      type: "HEX"
+      description: "This field is reverved for internal use only"
+      iso_field: "126.18"
+
+    - number: 93
+      name: "reversal_request_code"
+      display_name: "REVERSAL REQUEST CODE"
+      position: "799-800"
+      length: 2
+      type: "A/N"
+      description: "This value is a code the can be present in the reversal request for Mastercard transaction to signify the reason for a reversal"
+      data_source: "None"
+
+    - number: 94
+      name: "additional_pos_information_text"
+      display_name: "ADDITIONAL POS INFORMATION TEXT"
+      position: "801-812"
+      length: 12
+      type: "A/N"
+      description: "This value is a code that identifies the terminal's capability to electronically read account numbers and expiration dates from cards"
+      iso_field: "60"
+      notes: "Refer to Appendix A, Table A.8 for more details"
+
+    - number: 95
+      name: "endpoint_code"
+      display_name: "ENDPOINT CODE"
+      position: "813"
+      length: 1
+      type: "A/N"
+      description: "The value of this field is privately used by TSYS Acquiring Solutions and may contain one of the following values"
+      data_source: "None"
+      valid_values:
+        "V": "Visa"
+        "M": "Mastercard"
+        "A": "American Express"
+        "D": "Discover"
+        "C": "Citi Bank"
+        "S": "Stored Value Systems"
+        "F": "Fifth Third Bank"
+        "Null": "Not routed"
+        "T": "TSYS Issuing TS2"
+        "Y": "ValueLink"
+
+    - number: 96
+      name: "mapped_account_expiration_date"
+      display_name: "MAPPED ACCOUNT EXPIRATION DATE"
+      position: "814-817"
+      length: 4
+      type: "A/N"
+      description: "This value is the expiration date of the Mapped PayPass card"
+      iso_field: "73"
+
+    - number: 97
+      name: "pos_data_code"
+      display_name: "POS DATA CODE"
+      position: "818-829"
+      length: 12
+      type: "A/N"
+      description: "This field consists of 12 subfields that indicate the condition or state of the POS device at the time of the transaction. The fields come in two types, static or dynamic. Static fields have the same value for every transaction. They do not typically change once the software and hardware are considered together in the environment in which they are deployed. Dynamic fields can change based on the transaction scenario"
+      iso_field: "82"
+      variants:
+        mastercard:
+          description: "For Mastercard transactions, this field contains the settlement point of sale data that was sent to Mastercard"
+          subfields:
+            - number: "97.1"
+              name: "card_data_input_capability"
+              display_name: "Card Data Input Capability"
+              position: "818"
+              length: 1
+              type: "A/N"
+              description: "Subfield 1 - Terminal Data - Card Data Input Capability. This subfield indicates the highest-level capability of the device and its software used to originate this transaction. The value is static depending on the card data input capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "Manual; no terminal; Voice auth/ARU only"
+                "2": "Magnetic stripe reader capability only"
+                "4": "Optical character reader (OCR) capability"
+                "5": "Integrated circuit card (ICC) capability"
+                "6": "Key entry only capability"
+                "A": "PAN auto-entry via contactless magnetic stripe"
+                "B": "Magnetic stripe reader and key entry capability"
+                "C": "Magnetic stripe reader, ICC, and key entry capability"
+                "D": "Magnetic stripe reader and ICC capability"
+                "E": "ICC and key entry capability"
+                "M": "PAN auto-entry via contactless chip"
+                "V": "Other capability"
+
+            - number: "97.2"
+              name: "cardholder_authentication_capability"
+              display_name: "Cardholder Authentication Capability"
+              position: "819"
+              length: 1
+              type: "A/N"
+              description: "Subfield 2 - Terminal Data - Cardholder Authentication Capability. This subfield indicates the highest-level capability of the device and its software used to verify the Cardholder's identity at this terminal. The value is static depending on the terminal cardholder authentication capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "No electronic authentication capability"
+                "1": "PIN entry capability"
+                "2": "Electronic signature analysis capability"
+                "5": "Electronic authentication capability is inoperative"
+                "6": "Other"
+                "9": "Unspecified, data not available"
+
+            - number: "97.3"
+              name: "terminal_card_capture_capability"
+              display_name: "Terminal Card Capture Capability"
+              position: "820"
+              length: 1
+              type: "A/N"
+              description: "Subfield 3 - Terminal Card Capture Capability. This subfield indicates if the terminal is capable of pulling the card into the device while the transaction is taking place. The value is static depending on the terminal card capture capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "No capture capability"
+                "1": "Card capture capability"
+                "9": "Unspecified, data not available"
+
+            - number: "97.4"
+              name: "terminal_operating_environment"
+              display_name: "Terminal Operating Environment"
+              position: "821"
+              length: 1
+              type: "A/N"
+              description: "Subfield 4 - Terminal Operating Environment. This subfield indicates the terminal's location and indicates whether it is attended by the card acceptor. The value is static depending on the terminal's operating capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "No terminal used; Voice auth/ARU only"
+                "1": "On card acceptor premises; attended terminal"
+                "2": "On card acceptor premises; unattended terminal"
+                "3": "Off card acceptor premises; attended"
+                "4": "Off card acceptor premises; unattended"
+                "5": "On cardholder premises; unattended"
+                "6": "Off cardholder premises; unattended"
+                "9": "Unspecified, data not available"
+
+            - number: "97.5"
+              name: "cardholder_present_data"
+              display_name: "Cardholder Present Data"
+              position: "822"
+              length: 1
+              type: "A/N"
+              description: "Subfield 5 - Cardholder Present Data. This subfield indicates if the Cardholder is present at the point of service and if not, the reason why. The value is dynamic based on the Cardholder presence at the time of the transaction"
+              valid_values:
+                "0": "Cardholder present"
+                "1": "Cardholder not present; unspecified reason"
+                "2": "Cardholder not present; mail transaction"
+                "3": "Cardholder not present; phone transaction"
+                "4": "Cardholder not present; standing (recurring) transaction such as a subscription"
+                "5": "Cardholder not present; electronic commerce"
+
+            - number: "97.6"
+              name: "card_present_data"
+              display_name: "Card Present Data"
+              position: "823"
+              length: 1
+              type: "A/N"
+              description: "Subfield 6 - Card Present Data. This subfield indicates if the card is present at the point of service. The value is dynamic based on the card presence at the time of the transaction"
+              valid_values:
+                "0": "Card not present"
+                "1": "Card present"
+
+            - number: "97.7"
+              name: "card_data_input_mode"
+              display_name: "Card Data Input Mode"
+              position: "824"
+              length: 1
+              type: "A/N"
+              description: "Subfield 7 - Card Data Input Mode. This subfield indicates the method used to capture information from the card. The value is dynamic based on the input mode at the time of the transaction"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "Manual input; no terminal; Voice auth/ARU only"
+                "2": "Magnetic stripe reader input"
+                "6": "Key entered input"
+                "A": "PAN auto-entry via contactless magnetic stripe"
+                "B": "Magnetic stripe reader input; track data captured and passed unaltered"
+                "C": "Online Chip"
+                "F": "Offline Chip"
+                "M": "PAN auto entry via contactless Chip Card (EMV Mode)"
+                "R": "PAN Entry via electronic commerce, including remote chip"
+                "S": "Electronic commerce"
+                "T": "PAN auto entry via server (issuer, acquirer, or third party vendor system)"
+
+            - number: "97.8"
+              name: "cardholder_authentication_method"
+              display_name: "Cardholder Authentication Method"
+              position: "825"
+              length: 1
+              type: "A/N"
+              description: "Subfield 8 - Cardholder Authentication Method. This subfield indicates the method used for verifying the Cardholder's identity. The value is dynamic based on the Cardholder Authentication Method at the time of the transaction"
+              valid_values:
+                "0": "Not authenticated"
+                "1": "PIN"
+                "2": "Electronic signature analysis"
+                "5": "Manual signature verification"
+                "6": "Other manual verification (such as a driver's license number)"
+                "S": "Electronic Ticket Environment"
+
+            - number: "97.9"
+              name: "cardholder_authentication_entity"
+              display_name: "Cardholder Authentication Entity"
+              position: "826"
+              length: 1
+              type: "A/N"
+              description: "Subfield 9 - Cardholder Authentication Entity. This subfield indicates the component or person who verified Cardholder Identity reported in Cardholder Authentication (Subfield 8). The value is dynamic based on the Entity that performed the Authentication at the time of the transaction"
+              valid_values:
+                "0": "Not authenticated"
+                "1": "ICC - Offline PIN"
+                "2": "Card acceptance device (CAD)"
+                "3": "Online PIN"
+                "4": "Merchant/card acceptor - signature"
+                "5": "Other"
+
+            - number: "97.10"
+              name: "card_data_output_capability"
+              display_name: "Card Data Output Capability"
+              position: "827"
+              length: 1
+              type: "A/N"
+              description: "Subfield 10 - Card Data Output Capability. This subfield indicates the ability of the terminal and software to update or change the card. The value is static depending on the terminal and software capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "None"
+                "2": "Magnetic stripe write"
+                "3": "ICC"
+
+            - number: "97.11"
+              name: "terminal_data_output_capability"
+              display_name: "Terminal Data Output Capability"
+              position: "828"
+              length: 1
+              type: "A/N"
+              description: "Subfield 11 - Terminal Data Output Capability. This subfield indicates the ability of the terminal and/or software to print and/or display messages. This value is static depending on the terminal and/or software capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "None"
+                "2": "Printing capability only"
+                "3": "Display capability only"
+                "4": "Printing and display capability"
+
+        amex:
+          description: "For American Express transactions, this field contains the point of sale data that was sent to American Express"
+          subfields:
+            - number: "97.1"
+              name: "card_data_input_capability"
+              display_name: "Card Data Input Capability"
+              position: "818"
+              length: 1
+              type: "A/N"
+              description: "Subfield 1 - Terminal Data - Card Data Input Capability. This subfield indicates the highest-level capability of the device and its software used to originate this transaction. The value is static depending on the card data input capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "Manual; no terminal; Voice auth/ARU only"
+                "2": "Magnetic stripe read"
+                "3": "Bar Code"
+                "4": "Optical character reader (OCR)"
+                "5": "Integrated circuit card (ICC)"
+                "6": "Key entry only capability"
+
+            - number: "97.2"
+              name: "cardholder_authentication_capability"
+              display_name: "Terminal Data - Cardholder Authentication Capability"
+              position: "819"
+              length: 1
+              type: "A/N"
+              description: "Subfield 2 - Terminal Data - Cardholder Authentication Capability. This subfield indicates the highest-level capability of the device and its software used to verify the Cardholder's identity at this terminal. The value is static depending on the terminal cardholder-authentication capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "No electronic authentication capability"
+                "1": "PIN entry capability"
+                "2": "Electronic signature analysis capability"
+                "5": "Electronic authentication capability is inoperative"
+                "6": "Other"
+
+            - number: "97.3"
+              name: "terminal_card_capture_capability"
+              display_name: "Terminal Card Capture Capability"
+              position: "820"
+              length: 1
+              type: "A/N"
+              description: "Subfield 3 - Terminal Card Capture Capability. This subfield indicates if the terminal is capable of pulling the card into the device while the transaction is taking place. The value is static depending on the terminal card-capture capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "No capture capability or unknown"
+                "1": "Card capture capability"
+
+            - number: "97.4"
+              name: "terminal_operating_environment"
+              display_name: "Terminal Operating Environment"
+              position: "821"
+              length: 1
+              type: "A/N"
+              description: "Subfield 4 - Terminal Operating Environment. This subfield indicates the terminal's location and indicates whether it is attended by the card acceptor. The value is static depending on the terminal's operating capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "No terminal used; Voice auth/ARU only"
+                "1": "On card acceptor premises; attended terminal"
+                "2": "On card acceptor premises; unattended terminal"
+                "3": "Off card acceptor premises; attended"
+                "4": "Off card acceptor premises; unattended"
+                "5": "On cardholder premises; unattended"
+                "9": "Unspecified, data not available"
+                "S": "Electronic delivery of product"
+                "T": "Physical delivery of product"
+
+            - number: "97.5"
+              name: "cardholder_present_data"
+              display_name: "Cardholder Present Data"
+              position: "822"
+              length: 1
+              type: "A/N"
+              description: "Subfield 5 - Cardholder Present Data. This subfield indicates if the Cardholder is present at the point of service and if not, the reason why. The value is dynamic based on the Cardholder presence at the time of the transaction"
+              valid_values:
+                "0": "Cardholder present"
+                "1": "Cardholder not present; unspecified reason"
+                "2": "Cardholder not present; mail transaction"
+                "3": "Cardholder not present; phone transaction"
+                "4": "Cardholder not present; card on file transaction (billing frequency/amount are variable)"
+                "9": "Cardholder not present; recurring (membership, subscription, etc)"
+                "S": "Cardmember not present; electronic transaction"
+
+            - number: "97.6"
+              name: "card_present_data"
+              display_name: "Card Present Data"
+              position: "823"
+              length: 1
+              type: "A/N"
+              description: "Subfield 6 - Card Present Data. This subfield indicates if the card is present at the point of service. The value is dynamic based on the card presence at the time of the transaction"
+              valid_values:
+                "0": "Card not present"
+                "1": "Card present"
+                "W": "Transponder (RFID Token)"
+                "X": "Contactless, including ExpressPay"
+                "Z": "Digital Wallet - application initiated"
+            - number: "97.7"
+              name: "card_data_input_mode"
+              display_name: "Card Data Input Mode"
+              position: "824"
+              length: 1
+              type: "A/N"
+              description: "Subfield 7 - Card Data Input Mode. This subfield indicates the method used to capture information from the card. The value is dynamic based on the input mode at the time of the transaction"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "Manual input; no terminal; Voice auth/ARU only"
+                "2": "Magnetic stripe reader input"
+                "3": "Bar Code"
+                "4": "Optical Character Recognition (OCR)"
+                "5": "Integrated Circuit Card (ICC)"
+                "6": "Key entered input"
+                "9": "Technical fallback - initiated as chip but processed using alternative (such as mag stripe)"
+                "S": "Manually entered keyed CID"
+                "W": "Swiped transaction with keyed CID"
+            - number: "97.8"
+              name: "cardholder_authentication_method"
+              display_name: "Cardholder Authentication Method"
+              position: "825"
+              length: 1
+              type: "A/N"
+              description: "Subfield 8 - Cardholder Authentication Method. This subfield indicates the method used for verifying the Cardholder's identity. The value is dynamic based on the Cardholder Authentication Method at the time of the transaction"
+              valid_values:
+                "0": "Not authenticated"
+                "1": "PIN"
+                "2": "Electronic signature analysis"
+                "5": "Manual signature verification"
+                "6": "Other manual verification (such as a driver's license number)"
+                "S": "Electronic Ticket Environment"
+            - number: "97.9"
+              name: "cardholder_authentication_entity"
+              display_name: "Cardholder Authentication Entity"
+              position: "826"
+              length: 1
+              type: "A/N"
+              description: "Subfield 9 - Cardholder Authentication Entity. This subfield indicates the component or person who verified Cardholder Identity reported in Cardholder Authentication (Subfield 8). The value is dynamic based on the Entity that performed the Authentication at the time of the transaction"
+              valid_values:
+                "0": "Not authenticated"
+                "1": "ICC - Offline PIN"
+                "2": "Card acceptance device (CAD)"
+                "3": "Online PIN"
+                "4": "Merchant/card acceptor - signature"
+                "5": "Other"
+            - number: "97.10"
+              name: "card_data_output_capability"
+              display_name: "Card Data Output Capability"
+              position: "827"
+              length: 1
+              type: "A/N"
+              description: "Subfield 10 - Card Data Output Capability. This subfield indicates the ability of the terminal and software to update or change the card. The value is static depending on the terminal and software capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "None"
+                "2": "Magnetic stripe write"
+                "3": "ICC"
+            - number: "97.11"
+              name: "terminal_data_output_capability"
+              display_name: "Terminal Data Output Capability"
+              position: "828"
+              length: 1
+              type: "A/N"
+              description: "Subfield 11 - Terminal Data Output Capability. This subfield indicates the ability of the terminal and/or software to print and/or display messages. This value is static depending on the terminal and/or software capabilities in the environment in which it is deployed"
+              valid_values:
+                "0": "Unspecified, data not available"
+                "1": "None"
+                "2": "Printing capability only"
+                "3": "Display capability only" 
+                "4": "Printing and display capability"    
+            - number: "97.12"
+              name: "pin_capture_capability"
+              display_name: "PIN Capture Capability"
+              position: "829"
+              length: 1
+              type: "A/N"
+              description: "Subfield 12 - PIN Capture Capability. This subfield indicates the length of the PIN that the terminal is capable of capturing. The value is static depending on the capability of the terminal in the environment in which it is deployed"
+              valid_values:
+                "0": "No PIN capture capability"
+                "1": "Unspecified, data not available"
+                "2": "Reserved"
+                "3": "Reserved"
+                "4": "PIN capture capability four characters maximum"
+                "5": "PIN capture capability five characters maximum"
+                "6": "PIN capture capability six characters maximum"
+                "7": "PIN capture capability seven characters maximum"
+                "8": "PIN capture capability eight characters maximum"
+                "9": "PIN capture capability nine characters maximum"
+                "A": "PIN capture capability 10 characters maximum"
+                "B": "PIN capture capability 11 characters maximum"
+                "C": "PIN capture capability 12 characters maximum" 
+
+    - number: 98
+      name: "aba_number"
+      display_name: "ABA Number"
+      position: "830-838"
+      length: 9
+      type: "A/N"
+      description: "ABA Routing Transit Number"
+      data_source: "None"
+
+    - number: 99
+      name: "check_account_number"
+      display_name: "Check Account Number"
+      position: "839-857"
+      length: 19
+      type: "A/N"
+      description: "The Customer Deposit Account number"
+      data_source: "None"
+
+    - number: 100
+      name: "check_serial_number"
+      display_name: "Check Serial Number"
+      position: "858-872"
+      length: 15
+      type: "A/N"
+      description: "The Check Serial Number"
+      data_source: "None"
+
+    - number: 101
+      name: "local_transaction_date"
+      display_name: "Local Transaction Date"
+      position: "873-876"
+      length: 4
+      type: "N"
+      description: "MMDD. This is the month and day on which the cardholder originated the transaction. For recurring payments, the date is the cardholder requested payment date"
+      iso_field: "13"
+
+    - number: 102
+      name: "local_transaction_time"
+      display_name: "Local Transaction Time"
+      position: "877-882"
+      length: 6
+      type: "N"
+      description: "HHMMSS"
+      iso_field: "12"
+
+    - number: 103
+      name: "fee_program_indicator"
+      display_name: "Fee Program Indicator"
+      position: "883-885"
+      length: 3
+      type: "AN"
+      description: "Identifies the fee program assessed on the transaction"
+      iso_field: "63.19"
+
+    - number: 104
+      name: "visa_dcc_indicator"
+      display_name: "Visa DCC Indicator"
+      position: "886"
+      length: 1
+      type: "AN"
+      description: "Visa Dynamic Currency Conversion Indicator"
+      iso_field: "126.19"
+      valid_values:
+        "1": "DCC transaction"
+        "Space": "Not a DCC transaction"
+
+    - number: 105
+      name: "encryption_indicator"
+      display_name: "Encryption Indicator"
+      position: "887"
+      length: 1
+      type: "AN"
+      description: "Encryption Indicator"
+      data_source: "TSYS Internal"
+      valid_values:
+        "V": "Voltage Encrypted"
+        "Space": "Not an encrypted transaction"
+
+    - number: 106
+      name: "tsys_token_indicator"
+      display_name: "TSYS Token Indicator"
+      position: "888"
+      length: 1
+      type: "AN"
+      description: "TSYS Token Indicator"
+      data_source: "TSYS Internal"
+      valid_values:
+        "Y": "Transaction used Tokens"
+        "N": "Transaction did not use Tokens"
+
+    - number: 107
+      name: "account_funding_source"
+      display_name: "Account Funding Source"
+      position: "889"
+      length: 1
+      type: "AN"
+      description: "Account Funding Source"
+      data_source: "TSYS Internal"
+      valid_values:
+        "C": "Credit"
+        "D": "Debit"
+        "P": "Prepaid"
+        "H": "Charge"
+        "R": "Deferred Debit"
+        "Space": "N/A"
+
+    - number: 108
+      name: "issuing_bin_lookup"
+      display_name: "Issuing BIN Look-Up"
+      position: "890"
+      length: 1
+      type: "AN"
+      description: "Indicates the Issuing BIN was looked-up to determine if transaction is credit or debit"
+      data_source: "TSYS Internal"
+      valid_values:
+        "Y": "Look-Up Performed"
+        "N": "No Look-Up"
+
+    - number: 109
+      name: "fallback_indicator"
+      display_name: "Fallback Indicator"
+      position: "891"
+      length: 1
+      type: "AN"
+      description: "Indicates that a transaction initiated with a chip card at a chip card capable terminal failed, resulting in a fallback to a mag-stripe entry mode"
+      data_source: "TSYS Internal"
+      valid_values:
+        "T": "Technical fallback"
+        "E": "Empty Candidate List fallback"
+        "Space": "No Fallback"
+
+    - number: 110
+      name: "spend_qualified_indicator"
+      display_name: "Spend Qualified Indicator"
+      position: "892"
+      length: 1
+      type: "AN"
+      description: "This value is optionally sent by Visa in an authorization response message. The merchant's interchange rate may be determined by the value of the Spend Qualified Indicator"
+      iso_field: "62.25"
+      valid_values:
+        "Space": "Spend processing does not apply"
+        "B": "Base spend assessment threshold has been met"
+        "N": "Spend Qualification Threshold has not been met"
+        "Q": "Spend Qualification Threshold has been met"
+
+    - number: 111
+      name: "extension_record"
+      display_name: "Extension Record"
+      position: "893-900"
+      length: 8
+      type: "AN"
+      description: "Possible values"
+      data_source: "TSYS Internal"
+      valid_values:
+        "TD11": "Transaction Detail Extension record"
+         

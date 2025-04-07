@@ -1,0 +1,20 @@
+name: customer
+description: "Customer record specification"
+record_length: 58
+fields:
+  - name: id
+    length: 5
+    type: string
+    description: "Customer ID"
+  - name: name
+    length: 30
+    type: string
+    description: "Customer full name"
+  - name: age
+    length: 3
+    type: integer
+    description: "Customer age"
+  - name: city
+    length: 20
+    type: string
+    description: "Customer city" 

@@ -1,0 +1,9 @@
+fields:
+  - name: id
+    length: 5
+  - name: name
+    length: 30
+  - name: age
+    length: 3
+  - name: city
+    length: 20 
