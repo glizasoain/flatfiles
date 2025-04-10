@@ -266,7 +266,7 @@ RH01:
       description: "Reserved for future use"
 
 TD01:
-  description: "Transaction Detail Record"
+  description: "TSYS ADF Transaction Detail Record (TD01) – TSYS ADF Spec V8.6, December 27, 2016"
   length: 900
   fields:
     - number: 1
