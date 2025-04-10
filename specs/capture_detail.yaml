@@ -1,0 +1,513 @@
+record: Financial
+description: "TSYS CDF Financial Record \u2013 Capture Detail File Specification v10.3"
+fields:
+- field_number: 1
+  name: sequence_number
+  position:
+  - 1
+  - 7
+  length: 7
+  type: N
+  description: "Sequence Number - Identifies the record\u2019s position within the\
+    \ transmission file."
+- field_number: 2
+  name: transaction_code
+  position:
+  - 8
+  - 11
+  length: 4
+  type: N
+  description: Transaction Code - Indicates the type of transaction (e.g., 0101 =
+    Purchase, 0102 = Cash Advance, etc.)
+- field_number: 3
+  name: cardholder_account_number
+  position:
+  - 12
+  - 27
+  length: 16
+  type: AN
+  description: Cardholder Account Number - PAN, space-filled if <16 chars; use with
+    field 4 if >16.
+- field_number: 4
+  name: cardholder_account_number_expansion
+  position:
+  - 28
+  - 30
+  length: 3
+  type: AN
+  description: Cardholder Account Number Expansion - Additional PAN digits if >16
+    characters.
+- field_number: 5
+  name: transaction_date
+  position:
+  - 31
+  - 36
+  length: 6
+  type: N
+  description: Transaction Date - MMDDYY; for shipped goods, represents ship date.
+- field_number: 6
+  name: marketspecific_authorization_data_indicator
+  position:
+  - 37
+  - 37
+  length: 1
+  type: A
+  description: Market-Specific Authorization Data Indicator - e.g. B=Bill Payment,
+    E=eComm, M=Healthcare, T=Transit, etc.
+- field_number: 7
+  name: card_type_e.g.,_v=visa,_m=mastercard,_etc.
+  position:
+  - 38
+  - 38
+  length: 1
+  type: AN
+  description: Card Type (e.g., V=Visa, M=MasterCard, etc.)
+- field_number: 8
+  name: space_filled
+  position:
+  - 39
+  - 39
+  length: 1
+  type: AN
+  description: Space filled
+- field_number: 9
+  name: transaction_amount
+  position:
+  - 40
+  - 51
+  length: 12
+  type: N
+  description: Transaction Amount - 2 implied decimal places
+- field_number: 10a
+  name: merchant_dba_name
+  position:
+  - 52
+  - 76
+  length: 25
+  type: AN
+  description: Merchant DBA Name - left justified, space filled
+- field_number: 10b-1
+  name: visa_abbreviated_airline_name
+  position:
+  - 52
+  - 63
+  length: 12
+  type: AN
+  description: Visa Abbreviated Airline Name
+- field_number: 10b-2
+  name: visa_airline_ticket_number
+  position:
+  - 64
+  - 76
+  length: 13
+  type: AN
+  description: Visa Airline Ticket Number
+- field_number: 11
+  name: merchant_city
+  position:
+  - 77
+  - 89
+  length: 13
+  type: AN
+  description: Merchant City
+- field_number: 12
+  name: merchant_state_or_province_code
+  position:
+  - 90
+  - 92
+  length: 3
+  type: AN
+  description: Merchant State or Province Code
+- field_number: 13
+  name: extended_freetext_flag
+  position:
+  - 93
+  - 93
+  length: 1
+  type: AN
+  description: Extended Free-text Flag - Space filled
+- field_number: 14
+  name: merchant_country_code
+  position:
+  - 94
+  - 96
+  length: 3
+  type: AN
+  description: Merchant Country Code
+- field_number: 15
+  name: merchant_category_code_mcc
+  position:
+  - 97
+  - 100
+  length: 4
+  type: AN
+  description: Merchant Category Code (MCC)
+- field_number: 16
+  name: merchant_or_submerchant_zip_or_postal_code
+  position:
+  - 101
+  - 105
+  length: 5
+  type: AN
+  description: Merchant or Sub-Merchant ZIP or Postal Code
+- field_number: 17
+  name: authorization_code___approval_code
+  position:
+  - 106
+  - 111
+  length: 6
+  type: AN
+  description: Authorization Code / Approval Code
+- field_number: 18
+  name: acquirer's_internal_reference_number
+  position:
+  - 112
+  - 122
+  length: 11
+  type: N
+  description: Acquirer's Internal Reference Number
+- field_number: 19
+  name: authorization_source_code
+  position:
+  - 123
+  - 123
+  length: 1
+  type: AN
+  description: Authorization Source Code
+- field_number: 20
+  name: cardholder_identification_method
+  position:
+  - 124
+  - 124
+  length: 1
+  type: AN
+  description: Cardholder Identification Method
+- field_number: 21
+  name: acceptance_terminal_indicator
+  position:
+  - 125
+  - 125
+  length: 1
+  type: AN
+  description: Acceptance Terminal Indicator
+- field_number: 22
+  name: reimbursement_attribute_code
+  position:
+  - 126
+  - 126
+  length: 1
+  type: AN
+  description: Reimbursement Attribute Code - Space Filled
+- field_number: 23
+  name: chip_condition_code
+  position:
+  - 127
+  - 127
+  length: 1
+  type: AN
+  description: Chip Condition Code - Space Filled
+- field_number: 24
+  name: mail_telephone_or_electronic_commerce_indicator
+  position:
+  - 128
+  - 128
+  length: 1
+  type: AN
+  description: Mail/Telephone or Electronic Commerce Indicator
+- field_number: 25
+  name: pos_interaction_terminal_entry_mode
+  position:
+  - 129
+  - 130
+  length: 2
+  type: AN
+  description: POS/Interaction Terminal Entry Mode
+- field_number: 26
+  name: authorization_characteristics_indicator_aci
+  position:
+  - 131
+  - 131
+  length: 1
+  type: AN
+  description: Authorization Characteristics Indicator (ACI)
+- field_number: 27a
+  name: transaction_identifier
+  position:
+  - 132
+  - 146
+  length: 15
+  type: AN
+  description: Transaction Identifier
+- field_number: 27b-1
+  name: banknet_reference_number
+  position:
+  - 132
+  - 140
+  length: 9
+  type: AN
+  description: BankNet Reference Number
+- field_number: 27b-2
+  name: reserved_for_future_use
+  position:
+  - 141
+  - 146
+  length: 6
+  type: AN
+  description: Reserved for future use
+- field_number: 28
+  name: authorization_currency_code
+  position:
+  - 147
+  - 149
+  length: 3
+  type: AN
+  description: Authorization Currency Code
+- field_number: 29
+  name: authorization_amount
+  position:
+  - 150
+  - 161
+  length: 12
+  type: N
+  description: Authorization Amount
+- field_number: 30a
+  name: validation_code___track_data_condition_code
+  position:
+  - 162
+  - 165
+  length: 4
+  type: AN
+  description: Validation Code / Track Data Condition Code
+- field_number: 30b-1
+  name: electronic_commerce_security_level_indicator
+  position:
+  - 162
+  - 164
+  length: 3
+  type: N
+  description: Electronic Commerce Security Level Indicator
+- field_number: 30b-2
+  name: reserved_for_future_use
+  position:
+  - 165
+  - 165
+  length: 1
+  type: S
+  description: Reserved for future use
+- field_number: 31
+  name: authorization_response_code___response_code___approval_code
+  position:
+  - 166
+  - 167
+  length: 2
+  type: AN
+  description: Authorization Response Code / Response Code / Approval Code
+- field_number: 32
+  name: visa_mc_discover_transaction_date
+  position:
+  - 168
+  - 173
+  length: 6
+  type: AN
+  description: 'Visa/MC/Discover Transaction Date - Format: MMDDYY'
+- field_number: 33
+  name: reserved_for_future_use
+  position:
+  - 174
+  - 175
+  length: 2
+  type: AN
+  description: Reserved for future use
+- field_number: 34
+  name: debit_network_identifier
+  position:
+  - 176
+  - 178
+  length: 3
+  type: AN
+  description: Debit Network Identifier
+- field_number: 35
+  name: mastercard_switchsettled_indicator
+  position:
+  - 179
+  - 179
+  length: 1
+  type: AN
+  description: MasterCard Switch-Settled Indicator
+- field_number: 36
+  name: extension_record_indicator_e.g.,_extdd
+  position:
+  - 180
+  - 184
+  length: 5
+  type: AN
+  description: Extension Record Indicator (e.g., EXTDD)
+- field_number: 37
+  name: requested_payment_service
+  position:
+  - 185
+  - 185
+  length: 1
+  type: AN
+  description: Requested Payment Service
+- field_number: 38b-1
+  name: electronic_commerce_goods_indicator
+  position:
+  - 186
+  - 187
+  length: 2
+  type: AN
+  description: Electronic Commerce Goods Indicator
+- field_number: 38b-2
+  name: transaction_code_qualifier_tcq
+  position:
+  - 188
+  - 188
+  length: 1
+  type: AN
+  description: Transaction Code Qualifier (TCQ)
+- field_number: 38b-3
+  name: reserved_for_future_use
+  position:
+  - 189
+  - 191
+  length: 3
+  type: AN
+  description: Reserved for future use
+- field_number: 38c
+  name: sales_tax
+  position:
+  - 186
+  - 191
+  length: 6
+  type: N
+  description: Sales Tax - right justified, zero-filled
+- field_number: 39a
+  name: special_condition_indicator,_risk_id
+  position:
+  - 192
+  - 192
+  length: 1
+  type: AN
+  description: Special Condition Indicator, Risk ID
+- field_number: 39b
+  name: special_condition_indicator,_merchant_transaction
+  position:
+  - 193
+  - 193
+  length: 1
+  type: AN
+  description: Special Condition Indicator, Merchant Transaction
+- field_number: 39c
+  name: mastercard_new_iias_value
+  position:
+  - 192
+  - 193
+  length: 2
+  type: AN
+  description: MasterCard New IIAS Value
+- field_number: 40
+  name: visa_card_acceptor_identifier
+  position:
+  - 194
+  - 208
+  length: 15
+  type: AN
+  description: Visa Card Acceptor Identifier - Space filled
+- field_number: 41
+  name: point_of_sale_interaction_terminal_identifier
+  position:
+  - 209
+  - 216
+  length: 8
+  type: AN
+  description: Point of Sale/Interaction Terminal Identifier
+- field_number: 42
+  name: discover_paypal_amex_flag
+  position:
+  - 217
+  - 217
+  length: 1
+  type: AN
+  description: Discover/PayPal/AMEX Flag
+- field_number: 43
+  name: electronic_commerce_transaction_indicator
+  position:
+  - 218
+  - 218
+  length: 1
+  type: AN
+  description: Electronic Commerce Transaction Indicator
+- field_number: 44
+  name: cash_back_amount
+  position:
+  - 219
+  - 227
+  length: 9
+  type: AN
+  description: Cash back amount - Space filled
+- field_number: 45
+  name: store_type_identifier
+  position:
+  - 228
+  - 228
+  length: 1
+  type: AN
+  description: Store Type Identifier
+- field_number: 46
+  name: invoice_number
+  position:
+  - 229
+  - 236
+  length: 8
+  type: AN
+  description: Invoice Number - Space filled
+- field_number: 47
+  name: policy_number
+  position:
+  - 237
+  - 245
+  length: 9
+  type: AN
+  description: Policy Number - Space filled
+- field_number: 48
+  name: insurance_code
+  position:
+  - 246
+  - 248
+  length: 3
+  type: AN
+  description: Insurance Code - Space filled
+- field_number: 49
+  name: msr_flag
+  position:
+  - 249
+  - 249
+  length: 1
+  type: AN
+  description: MSR Flag - Space filled
+- field_number: 50
+  name: register_number
+  position:
+  - 250
+  - 254
+  length: 5
+  type: AN
+  description: Register Number - Space filled
+- field_number: 51
+  name: original_esid_code
+  position:
+  - 255
+  - 255
+  length: 1
+  type: AN
+  description: Original ESID Code - Space filled
+- field_number: 52
+  name: mastercard:_recurring_payment_indicator___private_label:_insurance_payment_choices
+  position:
+  - 256
+  - 256
+  length: 1
+  type: AN
+  description: 'MasterCard: Recurring Payment Indicator / Private label: Insurance
+    Payment Choices - Space filled'
