@@ -1,0 +1,669 @@
+record: TD01
+description: "TSYS ADF Transaction Detail Record (TD01) – TSYS ADF Spec V8.6, December 27, 2016"
+fields:
+  - field_number: 1
+    name: record_type
+    position: [1, 4]
+    length: 4
+    type: "AN"
+    description: "Indicates that this record is the Transaction Detail Header. Value = TD01"
+  - field_number: 2
+    name: acquirer_bin
+    position: [5, 10]
+    length: 6
+    type: "AN"
+    description: "Identifies the financial institution acting as the acquirer of this customer transaction (ISO Field #32[1-6])."
+  - field_number: 3
+    name: ext_bin
+    position: [11, 15]
+    length: 5
+    type: "AN"
+    description: "Extra BIN data received from the ISO message (ISO Field #32[7-11])."
+  - field_number: 4
+    name: agent
+    position: [16, 21]
+    length: 6
+    type: "AN"
+    description: "Agent code assigned by the merchant’s bank or processor."
+  - field_number: 5
+    name: chain
+    position: [22, 27]
+    length: 6
+    type: "AN"
+    description: "Chain code assigned by the merchant’s bank or processor."
+  - field_number: 6
+    name: econnection_merchant_number
+    position: [28, 42]
+    length: 15
+    type: "AN"
+    description: "Merchant number as displayed in the e-Connec­tions Authorization and Capture module."
+  - field_number: 7
+    name: store_number
+    position: [43, 46]
+    length: 4
+    type: "AN"
+    description: "Store number (ISO Field #41[1-4])."
+  - field_number: 8
+    name: terminal_number
+    position: [47, 50]
+    length: 4
+    type: "AN"
+    description: "Terminal number (ISO Field #41[5-8])."
+  - field_number: 9
+    name: card_acceptor_id
+    position: [51, 65]
+    length: 15
+    type: "AN"
+    description: "Card Acceptor ID – identifies the card acceptor operating the POS or POS terminal (ISO Field #42)."
+  - field_number: 10
+    name: merchant_name
+    position: [66, 90]
+    length: 25
+    type: "AN"
+    description: "Merchant Name (DBA). If a sub-merchant is used, this contains the sub-merchant name."
+  - field_number: 11
+    name: card_acceptor_city
+    position: [91, 108]
+    length: 18
+    type: "AN"
+    description: "City where the cardholder’s transaction occurs (ISO Field #43 positions 26–38)."
+  - field_number: 12
+    name: card_acceptor_state
+    position: [109, 110]
+    length: 2
+    type: "AN"
+    description: "State where the transaction occurs (ISO Field #43 positions 1–2 for sub-merchants)."
+  - field_number: 13
+    name: card_acceptor_country_code
+    position: [111, 112]
+    length: 2
+    type: "AN"
+    description: "Country where the transaction occurs (ISO Field #43 positions 39–40)."
+  - field_number: 14
+    name: country_code_pan_extended
+    position: [113, 115]
+    length: 3
+    type: "AN"
+    description: "Country code from the magnetic stripe identifying the issuer’s country (ISO Field #20)."
+  - field_number: 15
+    name: national_pos_geographic_data
+    position: [116, 129]
+    length: 14
+    type: "AN"
+    description: "National POS Geographic Data. Contains state, county, and postal code information (ISO Field #59)."
+  - field_number: 16
+    name: mcc_code
+    position: [130, 133]
+    length: 4
+    type: "N"
+    description: "Merchant Category Code (MCC) (ISO Field #18)."
+  - field_number: 17
+    name: merchant_aba_number
+    position: [134, 142]
+    length: 9
+    type: "AN"
+    description: "Merchant ABA Number, provided by the signing member or processor (ISO Field #63.10[5-13])."
+  - field_number: 18
+    name: card_acceptor_settlement_agent
+    position: [143, 146]
+    length: 4
+    type: "AN"
+    description: "Card Acceptor Settlement Agent (ISO Field #63.10[1-4])."
+  - field_number: 19
+    name: iso_source_station_id
+    position: [147, 152]
+    length: 6
+    type: "N"
+    description: "ISO Source Station ID – identifies the originator of the ISO request message."
+  - field_number: 20
+    name: acquirer_business_id
+    position: [153, 160]
+    length: 8
+    type: "AN"
+    description: "VISA-assigned Acquirer Business ID (ISO Field #63.8)."
+  - field_number: 21
+    name: acquirer_country_code
+    position: [161, 163]
+    length: 3
+    type: "AN"
+    description: "Country code of the acquirer (ISO Field #19)."
+  - field_number: 22
+    name: card_type
+    position: [164, 164]
+    length: 1
+    type: "AN"
+    description: "Card Type identifier (e.g. V for Visa, M for MasterCard, 3 for AmEx, etc.)."
+  - field_number: 23
+    name: primary_account_number
+    position: [165, 186]
+    length: 22
+    type: "AN"
+    description: "Primary Account Number (PAN); may be masked."
+  - field_number: 24
+    name: ext_pan
+    position: [187, 214]
+    length: 28
+    type: "AN"
+    description: "PAN Extension – additional digits if PAN is longer than 22 characters."
+  - field_number: 25
+    name: account_id_1
+    position: [215, 242]
+    length: 28
+    type: "AN"
+    description: "Account ID for check transactions or for PayPass for Mastercard."
+  - field_number: 26
+    name: card_expiration_date
+    position: [243, 246]
+    length: 4
+    type: "N"
+    description: "Card Expiration Date in YYMM format (ISO Field #14)."
+  - field_number: 27
+    name: issuing_institution_station_id
+    position: [247, 252]
+    length: 6
+    type: "AN"
+    description: "Issuing Institution Station ID (from ISO header field 6)."
+  - field_number: 28
+    name: issuing_institution_id_code
+    position: [253, 263]
+    length: 11
+    type: "AN"
+    description: "Issuing Institution ID Code (ISO Field #121)."
+  - field_number: 29
+    name: julian_day
+    position: [264, 266]
+    length: 3
+    type: "N"
+    description: "Julian Day of the transaction date (DDD format)."
+  - field_number: 30
+    name: transaction_datetime
+    position: [267, 285]
+    length: 19
+    type: "AN"
+    description: "Transaction Date & Time in GMT (YYYY-MM-DD HH:MM:SS)."
+  - field_number: 31
+    name: settlement_date
+    position: [286, 289]
+    length: 4
+    type: "N"
+    description: "Settlement Date (MMDD)."
+  - field_number: 32
+    name: load_datetime
+    position: [290, 308]
+    length: 19
+    type: "AN"
+    description: "Load Date & Time (GMT) when transaction was loaded into the report."
+  - field_number: 33
+    name: message_type
+    position: [309, 312]
+    length: 4
+    type: "AN"
+    description: "ISO Message Type (e.g., 0100, 0120, etc.)."
+  - field_number: 34
+    name: processing_code
+    position: [313, 318]
+    length: 6
+    type: "AN"
+    description: "Processing Code (ISO Field #3)."
+  - field_number: 35
+    name: access_method
+    position: [319, 320]
+    length: 2
+    type: "AN"
+    description: "Access Method; maps directly to the ASCII Line Type."
+  - field_number: 36
+    name: ascii_bill_code
+    position: [321, 321]
+    length: 1
+    type: "AN"
+    description: "ASCII Bill Code (billing descriptor)."
+  - field_number: 37
+    name: transaction_identifier
+    position: [322, 336]
+    length: 15
+    type: "AN"
+    description: "Transaction Identifier – links authorization and settlement (ISO Field #62.2/62.17)."
+  - field_number: 38
+    name: retrieval_reference_number
+    position: [337, 348]
+    length: 12
+    type: "AN"
+    description: "Retrieval Reference Number (RRN) (ISO Field #37)."
+  - field_number: 39
+    name: systems_trace_audit_number
+    position: [349, 354]
+    length: 6
+    type: "AN"
+    description: "Systems Trace Audit Number (STAN) (ISO Field #11)."
+  - field_number: 40
+    name: authorized_amount
+    position: [355, 366]
+    length: 12
+    type: "N"
+    description: "Authorized Amount (with implied decimals; ISO Field #4)."
+  - field_number: 41
+    name: cardholder_billing_amount
+    position: [367, 378]
+    length: 12
+    type: "N"
+    description: "Cardholder Billing Amount (converted to the cardholder’s billing currency, ISO Field #6)."
+  - field_number: 42
+    name: approval_code
+    position: [379, 384]
+    length: 6
+    type: "AN"
+    description: "Approval Code from the issuer (ISO Field #38)."
+  - field_number: 43
+    name: authorization_response
+    position: [385, 386]
+    length: 2
+    type: "AN"
+    description: "Authorization Response Code (ISO Field #39)."
+  - field_number: 44
+    name: internal_error_code
+    position: [387, 387]
+    length: 1
+    type: "AN"
+    description: "Internal Error Code (e.g., T, G, S, V, C or blank)."
+  - field_number: 45
+    name: iso_reject_code
+    position: [388, 391]
+    length: 4
+    type: "AN"
+    description: "ISO Reject Code (if an internal error exists; see spec for codes)."
+  - field_number: 46
+    name: cvv2_cvc2_cid_response_type
+    position: [392, 392]
+    length: 1
+    type: "AN"
+    description: "CVV2 / CVC2 / CID Response Type (indicates presence and method of verification)"
+  - field_number: 47
+    name: cvv2_cvc2_cid_presence_indicator
+    position: [393, 393]
+    length: 1
+    type: "AN"
+    description: "CVV2 / CVC2 / CID Presence Indicator (0 = bypassed/not provided, 1 = present, etc.)"
+  - field_number: 48
+    name: message_reason_code
+    position: [394, 397]
+    length: 4
+    type: "AN"
+    description: "Message Reason Code; used for reversals, merchant-initiated transactions, etc."
+  - field_number: 49
+    name: additional_response_data
+    position: [398, 422]
+    length: 25
+    type: "ANS"
+    description: "Additional Response Data (miscellaneous response message data, ISO Field #44 subfields)"
+  - field_number: 50
+    name: request_aci
+    position: [423, 423]
+    length: 1
+    type: "AS"
+    description: "Request ACI – indicates if CPS qualification was requested (ISO Field #62.1)"
+  - field_number: 51
+    name: return_aci
+    position: [424, 424]
+    length: 1
+    type: "AS"
+    description: "Return ACI – indicates the response to the ACI Request (ISO Field #62.1)"
+  - field_number: 52
+    name: validation_code
+    position: [425, 428]
+    length: 4
+    type: "AN"
+    description: "Validation Code – Visa calculated code (ISO Field #62.3)"
+  - field_number: 53
+    name: product_type_identification
+    position: [429, 430]
+    length: 2
+    type: "AN"
+    description: "Product Type Identification (ISO Field #62.23)"
+  - field_number: 54
+    name: transaction_source_flag
+    position: [431, 433]
+    length: 3
+    type: "N"
+    description: "Transaction Source Flag (identifies telecom provider, etc.)"
+  - field_number: 55
+    name: var_track_id
+    position: [434, 443]
+    length: 10
+    type: "AN"
+    description: "Var Track ID – Developer ID for the transaction"
+  - field_number: 56
+    name: vendor_id
+    position: [444, 448]
+    length: 5
+    type: "N"
+    description: "Vendor ID for the transaction"
+  - field_number: 57
+    name: pos_entry_mode
+    position: [449, 452]
+    length: 4
+    type: "AN"
+    description: "POS Entry Mode – method used to capture account number and expiration date (ISO Field #22)"
+  - field_number: 58
+    name: isa_charge_indicator
+    position: [453, 453]
+    length: 1
+    type: "AN"
+    description: "ISA Charge Indicator – indicates if Visa ISA charge was assessed (ISO Field #63.21)"
+  - field_number: 59
+    name: amex_cardholder_verification_results
+    position: [454, 462]
+    length: 9
+    type: "ANS"
+    description: "American Express Cardholder Verification Results (first 5 bytes: verification codes; rest reserved)"
+  - field_number: 60
+    name: pos_condition_code
+    position: [463, 464]
+    length: 2
+    type: "AN"
+    description: "POS Condition Code (conditions at the POS; ISO Field #25)"
+  - field_number: 61
+    name: additional_data_private_request
+    position: [465, 484]
+    length: 20
+    type: "AN"
+    description: "Additional Data Private Request (ISO Field #48)"
+  - field_number: 62
+    name: additional_data_private_response
+    position: [485, 504]
+    length: 20
+    type: "AN"
+    description: "Additional Data Private Response (ISO Field #48 mapping)"
+  - field_number: 63
+    name: supporting_information
+    position: [505, 564]
+    length: 60
+    type: "ANS"
+    description: "Supporting Information (ISO Field #125)"
+  - field_number: 64
+    name: duration
+    position: [565, 566]
+    length: 2
+    type: "AN"
+    description: "Duration – number of days anticipated (for auto rental/hotel stay, ISO Field #62.5)"
+  - field_number: 65
+    name: market_specific_data_indicator
+    position: [567, 567]
+    length: 1
+    type: "AN"
+    description: "Market Specific Data Indicator (e.g. A, H, B, M, T, N, E, or J)"
+  - field_number: 66
+    name: cash_back_amount
+    position: [568, 579]
+    length: 12
+    type: "N"
+    description: "Cash Back Amount (ISO Field #61.1)"
+  - field_number: 67
+    name: cardholder_billing_conversion_rate
+    position: [580, 588]
+    length: 9
+    type: "N"
+    description: "Cardholder Billing Conversion Rate (ISO Field #10)"
+  - field_number: 68
+    name: cardholder_billing_currency_code
+    position: [589, 591]
+    length: 3
+    type: "AN"
+    description: "Cardholder Billing Currency Code (numeric, ISO Field #51)"
+  - field_number: 69
+    name: request_additional_amount
+    position: [592, 611]
+    length: 20
+    type: "AN"
+    description: "Request Additional Amount (for balance inquiries, ISO Field #54 layout)"
+  - field_number: 70
+    name: mastercard_assigned_id
+    position: [612, 617]
+    length: 6
+    type: "AN"
+    description: "Mastercard Assigned ID (for private label/IIAS)"
+  - field_number: 71
+    name: mastercard_iias_indicator
+    position: [618, 618]
+    length: 1
+    type: "N"
+    description: "Mastercard IIAS Indicator (0, 1, or 2–indicating verification status)"
+  - field_number: 72
+    name: response_additional_amount
+    position: [619, 638]
+    length: 20
+    type: "AN"
+    description: "Response Additional Amount (ISO Field #54 layout for response)"
+  - field_number: 73
+    name: replacement_amounts
+    position: [639, 650]
+    length: 12
+    type: "AN"
+    description: "Replacement Amounts (corrected amount for partial reversal, ISO Field #95)"
+  - field_number: 74
+    name: xid
+    position: [651, 690]
+    length: 40
+    type: "AN"
+    description: "XID – Unique VSEC transaction ID generated by the merchant server (ISO Field #126.8)"
+  - field_number: 75
+    name: ucaf_collection_indicator
+    position: [691, 691]
+    length: 1
+    type: "AN"
+    description: "UCAF Collection Indicator for Mastercard transactions (ISO Field #126.15)"
+  - field_number: 76
+    name: transaction_currency_code
+    position: [692, 694]
+    length: 3
+    type: "AN"
+    description: "Transaction Currency Code (ISO Field #49)"
+  - field_number: 77
+    name: gateway_currency_code
+    position: [695, 697]
+    length: 3
+    type: "AN"
+    description: "Gateway Currency Code (TSYS Internal)"
+  - field_number: 78
+    name: gateway_country_code
+    position: [698, 700]
+    length: 3
+    type: "AN"
+    description: "Gateway Country Code (TSYS Internal)"
+  - field_number: 79
+    name: receiving_institution_country_code
+    position: [701, 703]
+    length: 3
+    type: "N"
+    description: "Receiving Institution Country Code (ISO Field #68)"
+  - field_number: 80
+    name: sharing_group
+    position: [704, 733]
+    length: 30
+    type: "ANS"
+    description: "Sharing Group (used by POS priority selection; ISO Field #63.12)"
+  - field_number: 81
+    name: giv
+    position: [734, 734]
+    length: 1
+    type: "AN"
+    description: "GIV – Gross Interchange Value indicator set by VISA (TSYS Internal)"
+  - field_number: 82
+    name: reimbursement_attribute
+    position: [735, 735]
+    length: 1
+    type: "ANS"
+    description: "Reimbursement Attribute (ISO Field #63.11)"
+  - field_number: 83
+    name: receiving_institution_id_code
+    position: [736, 746]
+    length: 11
+    type: "AN"
+    description: "Receiving Institution ID Code (ISO Field #100)"
+  - field_number: 84
+    name: network_id
+    position: [747, 750]
+    length: 4
+    type: "N"
+    description: "Network ID used for transmission (ISO Field #63.1)"
+  - field_number: 85
+    name: transaction_data
+    position: [751, 762]
+    length: 12
+    type: "AN"
+    description: "Transaction Data extracted from second-generation request messages (TSYS Internal)"
+  - field_number: 86
+    name: transaction_fee_amount
+    position: [763, 771]
+    length: 9
+    type: "AN"
+    description: "Transaction Fee Amount (ISO Field #28)"
+  - field_number: 87
+    name: prestigious_property_indicator
+    position: [772, 772]
+    length: 1
+    type: "AN"
+    description: "Prestigious Property Indicator (ISO Field #62.6)"
+  - field_number: 88
+    name: pre_auth_time_limit
+    position: [773, 776]
+    length: 4
+    type: "AN"
+    description: "Pre-Authorization Time Limit (for pre-auth and completion transactions, ISO Field #63.2)"
+  - field_number: 89
+    name: forwarding_institution_country_code
+    position: [777, 779]
+    length: 3
+    type: "AN"
+    description: "Forwarding Institution Country Code (ISO Field #21)"
+  - field_number: 90
+    name: dial_pay_authorization_call_type
+    position: [780, 781]
+    length: 2
+    type: "AN"
+    description: "Dial-Pay Authorization Call Type (TSYS Internal)"
+  - field_number: 91
+    name: digital_entity_identifier
+    position: [782, 786]
+    length: 5
+    type: "AN"
+    description: "Digital Entity Identifier assigned by Visa (ISO Field #126.18)"
+  - field_number: 92
+    name: reserved_field_92
+    position: [787, 798]
+    length: 12
+    type: "HEX"
+    description: "Reserved for internal use (ISO Field #126.18)"
+  - field_number: 93
+    name: reversal_request_code
+    position: [799, 800]
+    length: 2
+    type: "AN"
+    description: "Reversal Request Code for Mastercard transactions"
+  - field_number: 94
+    name: additional_pos_information_text
+    position: [801, 812]
+    length: 12
+    type: "AN"
+    description: "Additional POS Information Text (identifies terminal capability to read account data; ISO Field #60)"
+  - field_number: 95
+    name: endpoint_code
+    position: [813, 813]
+    length: 1
+    type: "AN"
+    description: "Endpoint Code (TSYS Internal – identifies the processing endpoint, e.g., V, M, A, D, etc.)"
+  - field_number: 96
+    name: mapped_account_expiration_date
+    position: [814, 817]
+    length: 4
+    type: "AN"
+    description: "Mapped Account Expiration Date (ISO Field #73)"
+  - field_number: 97
+    name: pos_data_code
+    position: [818, 829]
+    length: 12
+    type: "AN"
+    description: "POS Data Code – contains 12 subfields (static and dynamic) indicating the POS condition (ISO Field #82). Subfield details are not parsed here."
+  - field_number: 98
+    name: aba_number
+    position: [830, 838]
+    length: 9
+    type: "AN"
+    description: "ABA Number – ABA Routing Transit Number"
+  - field_number: 99
+    name: check_account_number
+    position: [839, 857]
+    length: 19
+    type: "AN"
+    description: "Check Account Number – Customer Deposit Account number"
+  - field_number: 100
+    name: check_serial_number
+    position: [858, 872]
+    length: 15
+    type: "AN"
+    description: "Check Serial Number"
+  - field_number: 101
+    name: local_transaction_date
+    position: [873, 876]
+    length: 4
+    type: "N"
+    description: "Local Transaction Date (MMDD)"
+  - field_number: 102
+    name: local_transaction_time
+    position: [877, 882]
+    length: 6
+    type: "N"
+    description: "Local Transaction Time (HHMMSS)"
+  - field_number: 103
+    name: fee_program_indicator_bottom
+    position: [883, 885]
+    length: 3
+    type: "AN"
+    description: "Fee Program Indicator (bottom portion)"
+  - field_number: 104
+    name: visa_dcc_indicator
+    position: [886, 886]
+    length: 1
+    type: "AN"
+    description: "Visa Dynamic Currency Conversion (DCC) Indicator"
+  - field_number: 105
+    name: encryption_indicator
+    position: [887, 887]
+    length: 1
+    type: "AN"
+    description: "Encryption Indicator"
+  - field_number: 106
+    name: tsys_token_indicator
+    position: [888, 888]
+    length: 1
+    type: "AN"
+    description: "TSYS Token Indicator"
+  - field_number: 107
+    name: account_funding_source
+    position: [889, 889]
+    length: 1
+    type: "AN"
+    description: "Account Funding Source (C: Credit, D: Debit, P: Prepaid, H: Charge, R: Deferred Debit)"
+  - field_number: 108
+    name: issuing_bin_lookup
+    position: [890, 890]
+    length: 1
+    type: "AN"
+    description: "Issuing BIN Look-Up – indicates if lookup was performed (Y/N)"
+  - field_number: 109
+    name: fallback_indicator_bottom
+    position: [891, 891]
+    length: 1
+    type: "AN"
+    description: "Fallback Indicator – indicates if fallback occurred"
+  - field_number: 110
+    name: spend_qualified_indicator
+    position: [892, 892]
+    length: 1
+    type: "AN"
+    description: "Spend Qualified Indicator – value from Visa (B, N, Q, or space)"
+  - field_number: 111
+    name: extension_record
+    position: [893, 900]
+    length: 8
+    type: "AN"
+    description: "Extension Record Indicator; if present, a TD11 record follows (e.g., 'TD11')"

@@ -1,4 +1,4 @@
-# TSYS Authorization Detail File (ADF) Specification v8.6
+  
 
 TH01:
   description: "Transmission Header Record"
@@ -2134,4 +2134,36 @@ TD01:
       data_source: "TSYS Internal"
       valid_values:
         "TD11": "Transaction Detail Extension record"
+         
+# TD11 - Transaction Detail Extension Record
+td11:
+  description: "This record contains additional information about a transaction and will be present on every transaction."
+  notes:
+    - "The Extension Record value that normally comes at the end of the record is in Field 2 in this record."
+    - "In the transaction detail extension section, brackets ([]) represent the position(s) within the ISO 8583 field. Please note that incomplete or rejected transactions may result in blank fields or fields populated with a question mark (?)."
+  
+  fields:
+    - number: 1
+      name: "record_type"
+      display_name: "RECORD TYPE"
+      position: "1-4"
+      length: 4
+      type: "AN"
+      description: "Indicates that this record is the Transaction Detail Extension Record. Value = TD11"
+      data_source: "TSYS Internal"
+
+    - number: 2
+      name: "extension_record"
+      display_name: "Extension Record"
+      position: "5-12"
+      length: 8
+      type: "AN"
+      description: "Indicates the record that follows the TD11 Record"
+      data_source: "TSYS Internal"
+      valid_values:
+        "Space": "no record follows"
+        "EX01": "Discover/PayPal extension record follows"
+        "EX02": "Mastercard extension record follows"
+        "EX03": "Additional detail data extension record follows"
+        "EX04": "Merchant Data extension record follows"
          
